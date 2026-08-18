@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Base de Conocimiento</title>
+
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body{
+        background:#f4f6f9;
+        padding:20px;
+    }
+
+    h1{
+        text-align:center;
+        color:#004481;
+        margin-bottom:20px;
+    }
+
+    .container{
+        max-width:1000px;
+        margin:auto;
+    }
+
+    .tema{
+        margin-bottom:15px;
+    }
+
+    .btn-tema{
+        width:100%;
+        background:#004481;
+        color:white;
+        border:none;
+        padding:15px;
+        text-align:left;
+        cursor:pointer;
+        border-radius:8px;
+        font-size:18px;
+        font-weight:bold;
+    }
+
+    .btn-tema:hover{
+        background:#0066c2;
+    }
+
+    .contenido{
+        display:none;
+        background:white;
+        border-radius:0 0 8px 8px;
+        padding:10px;
+        border:1px solid #ddd;
+    }
+
+    .subtema{
+        margin-top:10px;
+    }
+
+    .btn-subtema{
+        width:100%;
+        background:#e9eef5;
+        color:#333;
+        border:none;
+        padding:12px;
+        text-align:left;
+        cursor:pointer;
+        border-radius:6px;
+        font-weight:bold;
+    }
+
+    .btn-subtema:hover{
+        background:#d5e3f5;
+    }
+
+    .casos{
+        display:none;
+        margin-top:5px;
+        margin-left:15px;
+    }
+
+    .caso{
+        background:#f7f7f7;
+        padding:10px;
+        margin:5px 0;
+        border-left:4px solid #004481;
+        cursor:pointer;
+        border-radius:4px;
+    }
+
+    .caso:hover{
+        background:#ececec;
+    }
+
+    #detalle{
+        margin-top:25px;
+        background:white;
+        padding:20px;
+        border-radius:10px;
+        border:1px solid #ddd;
+    }
+
+    #detalle h2{
+        color:#004481;
+        margin-bottom:10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Base de Conocimiento BBVA</h1>
+
+<!-- AUTODESBLOQUEO -->
+<div class="tema">
+    <button class="btn-tema" onclick="toggle('auto')">
+        Autodesbloqueo
+    </button>
+
+    <div class="contenido" id="auto">
+
+        <div class="subtema">
+            <button class="btn-subtema" onclick="toggle('somos')">
+                SOMOS
+            </button>
+
+            <div class="casos" id="somos">
+                <div class="caso" onclick="mostrarCaso('Acudir a Sucursal')">
+                    Acudir a Sucursal
+                </div>
+
+                <div class="caso" onclick="mostrarCaso('Canalización con la DAR')">
+                    Canalización con la DAR
+                </div>
+            </div>
+        </div>
+
+        <div class="subtema">
+            <button class="btn-subtema" onclick="toggle('modoavion')">
+                Modo Avión
+            </button>
+
+            <div class="casos" id="modoavion">
+                <div class="caso" onclick="mostrarCaso('Si logra ingresar')">
+                    Si logra ingresar
+                </div>
+
+                <div class="caso" onclick="mostrarCaso('No logra ingresar')">
+                    No logra ingresar
+                </div>
+            </div>
+        </div>
+
+        <div class="subtema">
+            <button class="btn-subtema" onclick="toggle('hpd')">
+                HPD
+            </button>
+
+            <div class="casos" id="hpd">
+                <div class="caso" onclick="mostrarCaso('Desbloqueo con compañero')">
+                    Desbloqueo con compañero
+                </div>
+
+                <div class="caso" onclick="mostrarCaso('Desbloqueo desde la intranet')">
+                    Desbloqueo desde la intranet
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- PERIFERICOS -->
+<div class="tema">
+    <button class="btn-tema" onclick="toggle('perifericos')">
+        Periféricos de Oficina
+    </button>
+
+    <div class="contenido" id="perifericos">
+
+        <div class="subtema">
+            <button class="btn-subtema" onclick="toggle('cpu')">
+                CPU
+            </button>
+
+            <div class="casos" id="cpu">
+                <div class="caso" onclick="mostrarCaso('Banca PyME')">
+                    Banca PyME
+                </div>
+
+                <div class="caso" onclick="mostrarCaso('Proceso HW')">
+                    Proceso HW
+                </div>
+            </div>
+        </div>
+
+        <div class="subtema">
+            <button class="btn-subtema" onclick="toggle('teclado')">
+                Teclado
+            </button>
+
+            <div class="casos" id="teclado">
+                <div class="caso" onclick="mostrarCaso('Proceso HW Teclado')">
+                    Proceso HW
+                </div>
+
+                <div class="caso" onclick="mostrarCaso('Generación de reporte en SN')">
+                    Generación de reporte en SN
+                </div>
+            </div>
+        </div>
+
+        <div class="subtema">
+            <button class="btn-subtema" onclick="toggle('mouse')">
+                Mouse
+            </button>
+
+            <div class="casos" id="mouse">
+                <div class="caso" onclick="mostrarCaso('Proceso HW Mouse')">
+                    Proceso HW
+                </div>
+
+                <div class="caso" onclick="mostrarCaso('Conexión correcta')">
+                    Conexión correcta
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- VERSIONADO -->
+<div class="tema">
+    <button class="btn-tema" onclick="toggle('versionado')">
+        Versionado
+    </button>
+
+    <div class="contenido" id="versionado">
+
+        <div class="subtema">
+            <button class="btn-subtema" onclick="toggle('circuito')">
+                Circuito de Contratación
+            </button>
+
+            <div class="casos" id="circuito">
+                <div class="caso" onclick="mostrarCaso('TDC')">
+                    TDC
+                </div>
+
+                <div class="caso" onclick="mostrarCaso('Consumo')">
+                    Consumo
+                </div>
+            </div>
+        </div>
+
+        <div class="subtema">
+            <button class="btn-subtema" onclick="toggle('linkcard')">
+                Link Card
+            </button>
+
+            <div class="casos" id="linkcard">
+                <div class="caso" onclick="mostrarCaso('Formulario')">
+                    Formulario
+                </div>
+
+                <div class="caso" onclick="mostrarCaso('Enrolamiento Tutor')">
+                    Enrolamiento Tutor
+                </div>
+            </div>
+        </div>
+
+        <div class="subtema">
+            <button class="btn-subtema" onclick="toggle('softtoken')">
+                Soft Token
+            </button>
+
+            <div class="casos" id="softtoken">
+                <div class="caso" onclick="mostrarCaso('Token Cronto')">
+                    Token Cronto
+                </div>
+
+                <div class="caso" onclick="mostrarCaso('Token Digital Gema')">
+                    Token Digital Gema
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="detalle">
+    <h2>Información</h2>
+    <p>Selecciona un caso para visualizar el procedimiento.</p>
+</div>
+
+</div>
+
+<script>
+
+function toggle(id){
+    const elemento = document.getElementById(id);
+
+    if(elemento.style.display === "block"){
+        elemento.style.display = "none";
+    }else{
+        elemento.style.display = "block";
+    }
+}
+
+function mostrarCaso(caso){
+
+    const contenidos = {
+
+        "Acudir a Sucursal":
+        "Aquí puedes colocar el procedimiento completo para acudir a sucursal.",
+
+        "Canalización con la DAR":
+        "Aquí puedes colocar el procedimiento correspondiente.",
+
+        "Si logra ingresar":
+        "Procedimiento para clientes que logran ingresar después del modo avión.",
+
+        "No logra ingresar":
+        "Procedimiento para clientes que no logran ingresar.",
+
+        "Desbloqueo con compañero":
+        "Agregar aquí el paso a paso.",
+
+        "Desbloqueo desde la intranet":
+        "Agregar aquí el procedimiento.",
+
+        "Banca PyME":
+        "Contenido de Banca PyME.",
+
+        "Proceso HW":
+        "Procedimiento de Hardware.",
+
+        "Proceso HW Teclado":
+        "Procedimiento de teclado.",
+
+        "Generación de reporte en SN":
+        "Procedimiento para ServiceNow.",
+
+        "Proceso HW Mouse":
+        "Procedimiento de mouse.",
+
+        "Conexión correcta":
+        "Validación de conexión.",
+
+        "TDC":
+        "Información de TDC.",
+
+        "Consumo":
+        "Información de Consumo.",
+
+        "Formulario":
+        "Información del formulario.",
+
+        "Enrolamiento Tutor":
+        "Información de enrolamiento.",
+
+        "Token Cronto":
+        "Información de Token Cronto.",
+
+        "Token Digital Gema":
+        "Información de Token Digital Gema."
+    };
+
+    document.getElementById("detalle").innerHTML = `
+        <h2>${caso}</h2>
+        <p>${contenidos[caso]}</p>
+    `;
+}
+
+</script>
+
+</body>
+</html>
