@@ -131,9 +131,9 @@
             </button>
 
             <div class="casos" id="somos">
-                <div class="caso" onclick="mostrarCaso('Acudir a Sucursal')">
-                    Acudir a Sucursal
-                </div>
+                <div class="caso" onclick="abrirSimulador('Acudir a Sucursal')">
+                   Acudir a Sucursal
+                   </div>
 
                 <div class="caso" onclick="mostrarCaso('Canalización con la DAR')">
                     Canalización con la DAR
@@ -313,6 +313,17 @@ function toggle(id){
     }
 }
 
+function abrirSimulador(escenario){
+
+    localStorage.setItem("escenarioSeleccionado", escenario);
+
+    window.location.href =
+    "https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config";
+}
+
+    }
+}
+
 function mostrarCaso(caso){
 
     const contenidos = {
@@ -378,7 +389,6 @@ function mostrarCaso(caso){
     `;
 }
 
-</script>
 
 </body>
 </html>
