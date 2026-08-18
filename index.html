@@ -404,15 +404,15 @@ function toggle(id){
 
 function abrirSimulador(escenario){
 
-    // Guardamos el escenario seleccionado
     localStorage.setItem(
         "escenarioSeleccionado",
         escenario
     );
 
-    // Redireccionamos al simulador
-    window.location.href =
-        "https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config";
+    window.open(
+        "https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config",
+        "_blank"
+    );
 }
 
 </script>
