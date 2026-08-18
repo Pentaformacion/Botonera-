@@ -36,7 +36,9 @@
         margin-bottom:25px;
     }
 
-    .usuario-box{
+    .usuario-box,
+    .panel-activo,
+    .historial{
         background:white;
         border:1px solid #ddd;
         border-radius:10px;
@@ -44,12 +46,16 @@
         margin-bottom:20px;
     }
 
-    .usuario-box h2{
+    .usuario-box h2,
+    .panel-activo h2,
+    .historial h2{
         color:#004481;
         margin-bottom:15px;
     }
 
-    .usuario-box input{
+    .usuario-box input,
+    .form-group input,
+    .form-group textarea{
         width:100%;
         padding:12px;
         border:1px solid #ccc;
@@ -130,23 +136,10 @@
     .panel-activo{
         display:none;
         margin-top:25px;
-        background:white;
-        border:1px solid #ddd;
-        border-radius:10px;
-        padding:20px;
-    }
-
-    .panel-activo h2{
-        color:#004481;
-        margin-bottom:15px;
     }
 
     .dato{
         margin-bottom:10px;
-    }
-
-    .dato strong{
-        color:#333;
     }
 
     .form-group{
@@ -159,18 +152,22 @@
         font-weight:bold;
     }
 
-    .form-group input,
     .form-group textarea{
-        width:100%;
-        padding:12px;
-        border:1px solid #ccc;
-        border-radius:6px;
-        font-size:15px;
+        min-height:120px;
+        resize:vertical;
     }
 
-    .form-group textarea{
-        min-height:100px;
-        resize:vertical;
+    .resultado-box{
+        margin-top:20px;
+        background:#f8fbff;
+        border:1px dashed #7ba7cf;
+        border-radius:8px;
+        padding:15px;
+    }
+
+    .resultado-box h3{
+        color:#004481;
+        margin-bottom:10px;
     }
 
     .acciones{
@@ -204,17 +201,10 @@
         color:white;
     }
 
-    .historial{
-        margin-top:30px;
-        background:white;
-        border:1px solid #ddd;
-        border-radius:10px;
-        padding:20px;
-    }
-
-    .historial h2{
-        color:#004481;
-        margin-bottom:15px;
+    .btn-detectar{
+        background:#1473e6;
+        color:white;
+        margin-top:10px;
     }
 
     .tabla-contenedor{
@@ -240,10 +230,6 @@
         vertical-align:top;
     }
 
-    tr:hover{
-        background:#f7f7f7;
-    }
-
     .estado-iniciado{
         color:#d98300;
         font-weight:bold;
@@ -263,18 +249,22 @@
         cursor:pointer;
     }
 
-    .mensaje-vacio{
-        color:#777;
-        padding:15px 0;
+    .mensaje{
+        margin-top:10px;
+        font-weight:bold;
+    }
+
+    .mensaje-ok{
+        color:green;
+    }
+
+    .mensaje-error{
+        color:#c62828;
     }
 
     @media(max-width:700px){
         body{
             padding:10px;
-        }
-
-        h1{
-            font-size:23px;
         }
 
         .acciones{
@@ -297,8 +287,6 @@
         Selecciona el escenario que deseas practicar
     </p>
 
-
-    <!-- USUARIO -->
     <div class="usuario-box">
         <h2>Datos del asesor</h2>
 
@@ -309,127 +297,69 @@
         >
     </div>
 
-
     <!-- AUTODESBLOQUEO -->
     <div class="tema">
 
-        <button
-            class="btn-tema"
-            onclick="toggle('auto')"
-        >
+        <button class="btn-tema" onclick="toggle('auto')">
             Autodesbloqueo
         </button>
 
         <div class="contenido" id="auto">
 
-
-            <!-- SOMOS -->
             <div class="subtema">
-
-                <button
-                    class="btn-subtema"
-                    onclick="toggle('somos')"
-                >
+                <button class="btn-subtema" onclick="toggle('somos')">
                     SOMOS
                 </button>
 
                 <div class="casos" id="somos">
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Autodesbloqueo',
-                            'SOMOS',
-                            'Acudir a Sucursal'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Autodesbloqueo','SOMOS','Acudir a Sucursal')">
                         Acudir a Sucursal
                     </div>
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Autodesbloqueo',
-                            'SOMOS',
-                            'Canalización con la DAR'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Autodesbloqueo','SOMOS','Canalización con la DAR')">
                         Canalización con la DAR
                     </div>
 
                 </div>
             </div>
 
-
-            <!-- MODO AVION -->
             <div class="subtema">
-
-                <button
-                    class="btn-subtema"
-                    onclick="toggle('modoavion')"
-                >
+                <button class="btn-subtema" onclick="toggle('modoavion')">
                     Modo Avión
                 </button>
 
                 <div class="casos" id="modoavion">
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Autodesbloqueo',
-                            'Modo Avión',
-                            'Si logra ingresar'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Autodesbloqueo','Modo Avión','Si logra ingresar')">
                         Si logra ingresar
                     </div>
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Autodesbloqueo',
-                            'Modo Avión',
-                            'No logra ingresar'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Autodesbloqueo','Modo Avión','No logra ingresar')">
                         No logra ingresar
                     </div>
 
                 </div>
             </div>
 
-
-            <!-- HPD -->
             <div class="subtema">
-
-                <button
-                    class="btn-subtema"
-                    onclick="toggle('hpd')"
-                >
+                <button class="btn-subtema" onclick="toggle('hpd')">
                     HPD
                 </button>
 
                 <div class="casos" id="hpd">
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Autodesbloqueo',
-                            'HPD',
-                            'Desbloqueo con compañero'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Autodesbloqueo','HPD','Desbloqueo con compañero')">
                         Desbloqueo con compañero
                     </div>
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Autodesbloqueo',
-                            'HPD',
-                            'Desbloqueo desde la intranet'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Autodesbloqueo','HPD','Desbloqueo desde la intranet')">
                         Desbloqueo desde la intranet
                     </div>
 
@@ -439,127 +369,69 @@
         </div>
     </div>
 
-
     <!-- PERIFERICOS -->
     <div class="tema">
 
-        <button
-            class="btn-tema"
-            onclick="toggle('perifericos')"
-        >
+        <button class="btn-tema" onclick="toggle('perifericos')">
             Periféricos de Oficina
         </button>
 
         <div class="contenido" id="perifericos">
 
-
-            <!-- CPU -->
             <div class="subtema">
-
-                <button
-                    class="btn-subtema"
-                    onclick="toggle('cpu')"
-                >
+                <button class="btn-subtema" onclick="toggle('cpu')">
                     CPU
                 </button>
 
                 <div class="casos" id="cpu">
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Periféricos de Oficina',
-                            'CPU',
-                            'Banca PyME'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Periféricos de Oficina','CPU','Banca PyME')">
                         Banca PyME
                     </div>
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Periféricos de Oficina',
-                            'CPU',
-                            'Proceso HW'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Periféricos de Oficina','CPU','Proceso HW')">
                         Proceso HW
                     </div>
 
                 </div>
             </div>
 
-
-            <!-- TECLADO -->
             <div class="subtema">
-
-                <button
-                    class="btn-subtema"
-                    onclick="toggle('teclado')"
-                >
+                <button class="btn-subtema" onclick="toggle('teclado')">
                     Teclado
                 </button>
 
                 <div class="casos" id="teclado">
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Periféricos de Oficina',
-                            'Teclado',
-                            'Proceso HW'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Periféricos de Oficina','Teclado','Proceso HW')">
                         Proceso HW
                     </div>
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Periféricos de Oficina',
-                            'Teclado',
-                            'Generación de reporte en SN'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Periféricos de Oficina','Teclado','Generación de reporte en SN')">
                         Generación de reporte en SN
                     </div>
 
                 </div>
             </div>
 
-
-            <!-- MOUSE -->
             <div class="subtema">
-
-                <button
-                    class="btn-subtema"
-                    onclick="toggle('mouse')"
-                >
+                <button class="btn-subtema" onclick="toggle('mouse')">
                     Mouse
                 </button>
 
                 <div class="casos" id="mouse">
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Periféricos de Oficina',
-                            'Mouse',
-                            'Proceso HW'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Periféricos de Oficina','Mouse','Proceso HW')">
                         Proceso HW
                     </div>
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Periféricos de Oficina',
-                            'Mouse',
-                            'Conexión correcta'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Periféricos de Oficina','Mouse','Conexión correcta')">
                         Conexión correcta
                     </div>
 
@@ -569,127 +441,69 @@
         </div>
     </div>
 
-
     <!-- VERSIONADO -->
     <div class="tema">
 
-        <button
-            class="btn-tema"
-            onclick="toggle('versionado')"
-        >
+        <button class="btn-tema" onclick="toggle('versionado')">
             Versionado
         </button>
 
         <div class="contenido" id="versionado">
 
-
-            <!-- CIRCUITO -->
             <div class="subtema">
-
-                <button
-                    class="btn-subtema"
-                    onclick="toggle('circuito')"
-                >
+                <button class="btn-subtema" onclick="toggle('circuito')">
                     Circuito de Contratación
                 </button>
 
                 <div class="casos" id="circuito">
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Versionado',
-                            'Circuito de Contratación',
-                            'TDC'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Versionado','Circuito de Contratación','TDC')">
                         TDC
                     </div>
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Versionado',
-                            'Circuito de Contratación',
-                            'Consumo'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Versionado','Circuito de Contratación','Consumo')">
                         Consumo
                     </div>
 
                 </div>
             </div>
 
-
-            <!-- LINK CARD -->
             <div class="subtema">
-
-                <button
-                    class="btn-subtema"
-                    onclick="toggle('linkcard')"
-                >
+                <button class="btn-subtema" onclick="toggle('linkcard')">
                     Link Card
                 </button>
 
                 <div class="casos" id="linkcard">
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Versionado',
-                            'Link Card',
-                            'Formulario'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Versionado','Link Card','Formulario')">
                         Formulario
                     </div>
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Versionado',
-                            'Link Card',
-                            'Enrolamiento Tutor'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Versionado','Link Card','Enrolamiento Tutor')">
                         Enrolamiento Tutor
                     </div>
 
                 </div>
             </div>
 
-
-            <!-- SOFT TOKEN -->
             <div class="subtema">
-
-                <button
-                    class="btn-subtema"
-                    onclick="toggle('softtoken')"
-                >
+                <button class="btn-subtema" onclick="toggle('softtoken')">
                     Soft Token
                 </button>
 
                 <div class="casos" id="softtoken">
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Versionado',
-                            'Soft Token',
-                            'Token Cronto'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Versionado','Soft Token','Token Cronto')">
                         Token Cronto
                     </div>
 
-                    <div
-                        class="caso"
-                        onclick="iniciarEscenario(
-                            'Versionado',
-                            'Soft Token',
-                            'Token Digital Gema'
-                        )"
-                    >
+                    <div class="caso"
+                         onclick="iniciarEscenario('Versionado','Soft Token','Token Digital Gema')">
                         Token Digital Gema
                     </div>
 
@@ -699,8 +513,7 @@
         </div>
     </div>
 
-
-    <!-- PANEL DE SIMULACION ACTIVA -->
+    <!-- PANEL ACTIVO -->
     <div class="panel-activo" id="panelActivo">
 
         <h2>Simulación en curso</h2>
@@ -730,8 +543,45 @@
             <span id="activoFecha"></span>
         </div>
 
+        <div class="resultado-box">
+
+            <h3>Pegar resultado de Xira</h3>
+
+            <p>
+                Copia la retroalimentación o texto del resultado de Xira
+                y pégalo aquí.
+            </p>
+
+            <div class="form-group">
+                <textarea
+                    id="resultadoXira"
+                    placeholder="Ejemplo:
+
+score: 93
+
+Script de bienvenida: 10/10
+Sondeo e identificación de la falla: 20/20
+Aplicación del procedimiento: 30/30
+..."
+                ></textarea>
+            </div>
+
+            <button
+                class="btn btn-detectar"
+                onclick="detectarResultado()"
+            >
+                Detectar calificación
+            </button>
+
+            <div
+                id="mensajeDeteccion"
+                class="mensaje"
+            ></div>
+
+        </div>
 
         <div class="form-group">
+
             <label for="calificacion">
                 Calificación obtenida
             </label>
@@ -743,20 +593,21 @@
                 max="100"
                 placeholder="Ejemplo: 93"
             >
+
         </div>
 
-
         <div class="form-group">
+
             <label for="observaciones">
                 Observaciones o retroalimentación
             </label>
 
             <textarea
                 id="observaciones"
-                placeholder="Puedes copiar aquí la retroalimentación de Xira..."
+                placeholder="La retroalimentación detectada aparecerá aquí..."
             ></textarea>
-        </div>
 
+        </div>
 
         <div class="acciones">
 
@@ -784,7 +635,6 @@
         </div>
 
     </div>
-
 
     <!-- HISTORIAL -->
     <div class="historial">
@@ -815,17 +665,13 @@
 
         </div>
 
-        <div
-            class="mensaje-vacio"
-            id="mensajeVacio"
-        >
+        <div id="mensajeVacio">
             Todavía no existen simulaciones registradas.
         </div>
 
     </div>
 
 </div>
-
 
 <script>
 
@@ -835,9 +681,9 @@ const URL_XIRA =
 let simulacionActiva = null;
 
 
-/* ==========================================
-   ABRIR / CERRAR MENUS
-========================================== */
+/* =============================
+   MENUS
+============================= */
 
 function toggle(id){
 
@@ -853,15 +699,11 @@ function toggle(id){
 }
 
 
-/* ==========================================
+/* =============================
    INICIAR ESCENARIO
-========================================== */
+============================= */
 
-function iniciarEscenario(
-    tema,
-    subtema,
-    caso
-){
+function iniciarEscenario(tema, subtema, caso){
 
     const asesor =
         document
@@ -875,18 +717,8 @@ function iniciarEscenario(
             "Primero ingresa el nombre o número de empleado del asesor."
         );
 
-        document
-        .getElementById("nombreAsesor")
-        .focus();
-
         return;
     }
-
-
-    const fecha =
-        new Date()
-        .toLocaleString("es-MX");
-
 
     simulacionActiva = {
 
@@ -900,7 +732,8 @@ function iniciarEscenario(
 
         caso: caso,
 
-        fecha: fecha,
+        fecha:
+            new Date().toLocaleString("es-MX"),
 
         estado: "Iniciado",
 
@@ -910,42 +743,189 @@ function iniciarEscenario(
 
     };
 
-
     localStorage.setItem(
         "simulacionActiva",
         JSON.stringify(simulacionActiva)
     );
 
+    registrarInicio(simulacionActiva);
 
     mostrarPanelActivo();
 
-
-    registrarInicio(
-        simulacionActiva
-    );
-
-
     abrirXira();
+}
+
+
+/* =============================
+   ABRIR XIRA
+============================= */
+
+function abrirXira(){
+
+    window.open(
+        URL_XIRA,
+        "_blank"
+    );
 
 }
 
 
-/* ==========================================
+/* =============================
+   DETECTAR RESULTADO
+============================= */
+
+function detectarResultado(){
+
+    const texto =
+        document
+        .getElementById("resultadoXira")
+        .value
+        .trim();
+
+    const mensaje =
+        document
+        .getElementById("mensajeDeteccion");
+
+    mensaje.textContent = "";
+    mensaje.className = "mensaje";
+
+    if(!texto){
+
+        mensaje.textContent =
+            "Pega primero el resultado de Xira.";
+
+        mensaje.classList.add(
+            "mensaje-error"
+        );
+
+        return;
+    }
+
+    let score = null;
+
+
+    /* Busca:
+       score: 93
+       "score": "93"
+       "score": 93
+    */
+
+    const scoreRegex =
+        /["']?score["']?\s*[:=]\s*["']?\s*(\d{1,3})/i;
+
+    const scoreMatch =
+        texto.match(scoreRegex);
+
+    if(scoreMatch){
+
+        score =
+            Number(scoreMatch[1]);
+
+    }
+
+
+    /* Si no encontró score,
+       busca porcentaje:
+       93%
+    */
+
+    if(score === null){
+
+        const porcentajeRegex =
+            /\b(100|[1-9]?\d)\s*%/;
+
+        const porcentajeMatch =
+            texto.match(porcentajeRegex);
+
+        if(porcentajeMatch){
+
+            score =
+                Number(
+                    porcentajeMatch[1]
+                );
+
+        }
+
+    }
+
+
+    /* Busca desempeño:
+       Desempeño 93
+    */
+
+    if(score === null){
+
+        const desempenoRegex =
+            /desempeño\s*[:\-]?\s*(\d{1,3})/i;
+
+        const desempenoMatch =
+            texto.match(desempenoRegex);
+
+        if(desempenoMatch){
+
+            score =
+                Number(
+                    desempenoMatch[1]
+                );
+
+        }
+
+    }
+
+
+    if(
+        score !== null &&
+        score >= 0 &&
+        score <= 100
+    ){
+
+        document
+        .getElementById("calificacion")
+        .value = score;
+
+
+        document
+        .getElementById("observaciones")
+        .value = texto;
+
+
+        mensaje.textContent =
+            "Calificación detectada: " +
+            score +
+            "%";
+
+        mensaje.classList.add(
+            "mensaje-ok"
+        );
+
+    }else{
+
+        mensaje.textContent =
+            "No pude detectar automáticamente la calificación. Puedes ingresarla manualmente.";
+
+        mensaje.classList.add(
+            "mensaje-error"
+        );
+
+    }
+
+}
+
+
+/* =============================
    REGISTRAR INICIO
-========================================== */
+============================= */
 
 function registrarInicio(simulacion){
 
     let historial =
         obtenerHistorial();
 
-
     const existe =
         historial.some(
             item =>
             item.id === simulacion.id
         );
-
 
     if(!existe){
 
@@ -959,29 +939,14 @@ function registrarInicio(simulacion){
 
     }
 
-
     renderHistorial();
 
 }
 
 
-/* ==========================================
-   ABRIR XIRA
-========================================== */
-
-function abrirXira(){
-
-    window.open(
-        URL_XIRA,
-        "_blank"
-    );
-
-}
-
-
-/* ==========================================
-   MOSTRAR SIMULACION ACTIVA
-========================================== */
+/* =============================
+   PANEL ACTIVO
+============================= */
 
 function mostrarPanelActivo(){
 
@@ -989,66 +954,51 @@ function mostrarPanelActivo(){
         return;
     }
 
-
     document
     .getElementById("panelActivo")
     .style.display = "block";
-
 
     document
     .getElementById("activoAsesor")
     .textContent =
         simulacionActiva.asesor;
 
-
     document
     .getElementById("activoTema")
     .textContent =
         simulacionActiva.tema;
-
 
     document
     .getElementById("activoSubtema")
     .textContent =
         simulacionActiva.subtema;
 
-
     document
     .getElementById("activoCaso")
     .textContent =
         simulacionActiva.caso;
-
 
     document
     .getElementById("activoFecha")
     .textContent =
         simulacionActiva.fecha;
 
-
     document
     .getElementById("calificacion")
     .value =
         simulacionActiva.calificacion || "";
-
 
     document
     .getElementById("observaciones")
     .value =
         simulacionActiva.observaciones || "";
 
-
-    document
-    .getElementById("panelActivo")
-    .scrollIntoView({
-        behavior:"smooth"
-    });
-
 }
 
 
-/* ==========================================
-   FINALIZAR SIMULACION
-========================================== */
+/* =============================
+   FINALIZAR
+============================= */
 
 function finalizarSimulacion(){
 
@@ -1059,22 +1009,18 @@ function finalizarSimulacion(){
         );
 
         return;
-
     }
-
 
     const calificacion =
         document
         .getElementById("calificacion")
         .value;
 
-
     const observaciones =
         document
         .getElementById("observaciones")
         .value
         .trim();
-
 
     if(calificacion === ""){
 
@@ -1083,9 +1029,7 @@ function finalizarSimulacion(){
         );
 
         return;
-
     }
-
 
     if(
         Number(calificacion) < 0 ||
@@ -1097,30 +1041,23 @@ function finalizarSimulacion(){
         );
 
         return;
-
     }
-
 
     simulacionActiva.calificacion =
         Number(calificacion);
 
-
     simulacionActiva.observaciones =
         observaciones;
 
-
     simulacionActiva.estado =
         "Finalizado";
-
 
     simulacionActiva.fechaFinal =
         new Date()
         .toLocaleString("es-MX");
 
-
     let historial =
         obtenerHistorial();
-
 
     historial =
         historial.map(
@@ -1140,37 +1077,33 @@ function finalizarSimulacion(){
             }
         );
 
-
     guardarHistorial(
         historial
     );
-
 
     localStorage.removeItem(
         "simulacionActiva"
     );
 
-
     simulacionActiva = null;
-
 
     document
     .getElementById("panelActivo")
     .style.display = "none";
 
+    document
+    .getElementById("resultadoXira")
+    .value = "";
 
     document
     .getElementById("calificacion")
     .value = "";
 
-
     document
     .getElementById("observaciones")
     .value = "";
 
-
     renderHistorial();
-
 
     alert(
         "Resultado guardado correctamente."
@@ -1179,9 +1112,9 @@ function finalizarSimulacion(){
 }
 
 
-/* ==========================================
-   CANCELAR SIMULACION
-========================================== */
+/* =============================
+   CANCELAR
+============================= */
 
 function cancelarSimulacion(){
 
@@ -1189,21 +1122,17 @@ function cancelarSimulacion(){
         return;
     }
 
-
     const confirmar =
         confirm(
             "¿Deseas cancelar esta simulación?"
         );
 
-
     if(!confirmar){
         return;
     }
 
-
     let historial =
         obtenerHistorial();
-
 
     historial =
         historial.filter(
@@ -1212,33 +1141,28 @@ function cancelarSimulacion(){
             simulacionActiva.id
         );
 
-
     guardarHistorial(
         historial
     );
-
 
     localStorage.removeItem(
         "simulacionActiva"
     );
 
-
     simulacionActiva = null;
-
 
     document
     .getElementById("panelActivo")
     .style.display = "none";
-
 
     renderHistorial();
 
 }
 
 
-/* ==========================================
+/* =============================
    HISTORIAL
-========================================== */
+============================= */
 
 function obtenerHistorial(){
 
@@ -1247,11 +1171,9 @@ function obtenerHistorial(){
             "historialSimulaciones"
         );
 
-
     if(!datos){
         return [];
     }
-
 
     try{
 
@@ -1276,30 +1198,22 @@ function guardarHistorial(historial){
 }
 
 
-/* ==========================================
-   MOSTRAR HISTORIAL
-========================================== */
-
 function renderHistorial(){
 
     const historial =
         obtenerHistorial();
-
 
     const tabla =
         document.getElementById(
             "tablaHistorial"
         );
 
-
     const vacio =
         document.getElementById(
             "mensajeVacio"
         );
 
-
     tabla.innerHTML = "";
-
 
     if(historial.length === 0){
 
@@ -1310,10 +1224,8 @@ function renderHistorial(){
 
     }
 
-
     vacio.style.display =
         "none";
-
 
     historial.forEach(
         item => {
@@ -1323,12 +1235,10 @@ function renderHistorial(){
                     "tr"
                 );
 
-
             const claseEstado =
                 item.estado === "Finalizado"
                 ? "estado-finalizado"
                 : "estado-iniciado";
-
 
             fila.innerHTML = `
 
@@ -1367,16 +1277,16 @@ function renderHistorial(){
                 </td>
 
                 <td>
+
                     <button
                         class="btn-borrar"
                         onclick="borrarRegistro(${item.id})"
                     >
                         Borrar
                     </button>
+
                 </td>
-
             `;
-
 
             tabla.appendChild(
                 fila
@@ -1388,9 +1298,9 @@ function renderHistorial(){
 }
 
 
-/* ==========================================
+/* =============================
    BORRAR REGISTRO
-========================================== */
+============================= */
 
 function borrarRegistro(id){
 
@@ -1399,15 +1309,12 @@ function borrarRegistro(id){
             "¿Deseas borrar este registro?"
         );
 
-
     if(!confirmar){
         return;
     }
 
-
     let historial =
         obtenerHistorial();
-
 
     historial =
         historial.filter(
@@ -1415,20 +1322,18 @@ function borrarRegistro(id){
             item.id !== id
         );
 
-
     guardarHistorial(
         historial
     );
-
 
     renderHistorial();
 
 }
 
 
-/* ==========================================
-   SEGURIDAD PARA MOSTRAR TEXTO
-========================================== */
+/* =============================
+   ESCAPAR HTML
+============================= */
 
 function escaparHTML(texto){
 
@@ -1438,7 +1343,6 @@ function escaparHTML(texto){
     ){
         return "";
     }
-
 
     return String(texto)
 
@@ -1470,9 +1374,9 @@ function escaparHTML(texto){
 }
 
 
-/* ==========================================
-   RECUPERAR SIMULACION ACTIVA
-========================================== */
+/* =============================
+   RECUPERAR ACTIVA
+============================= */
 
 function recuperarSimulacionActiva(){
 
@@ -1481,11 +1385,9 @@ function recuperarSimulacionActiva(){
             "simulacionActiva"
         );
 
-
     if(!guardada){
         return;
     }
-
 
     try{
 
@@ -1494,14 +1396,12 @@ function recuperarSimulacionActiva(){
                 guardada
             );
 
-
         document
         .getElementById(
             "nombreAsesor"
         )
         .value =
             simulacionActiva.asesor;
-
 
         mostrarPanelActivo();
 
@@ -1514,9 +1414,9 @@ function recuperarSimulacionActiva(){
 }
 
 
-/* ==========================================
+/* =============================
    INICIO
-========================================== */
+============================= */
 
 document.addEventListener(
     "DOMContentLoaded",
