@@ -3,417 +3,1531 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Base de Conocimiento</title>
+<title>Portal de Simulación BBVA</title>
 
 <style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, sans-serif;
+    }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+    body{
+        background:#f4f6f9;
+        padding:20px;
+        color:#222;
+    }
 
-body{
-    background:#f4f6f9;
-    padding:20px;
-}
+    .container{
+        max-width:1100px;
+        margin:auto;
+    }
 
-h1{
-    text-align:center;
-    color:#004481;
-    margin-bottom:20px;
-}
+    h1{
+        text-align:center;
+        color:#004481;
+        margin-bottom:8px;
+    }
 
-.container{
-    max-width:1000px;
-    margin:auto;
-}
+    .subtitulo{
+        text-align:center;
+        color:#666;
+        margin-bottom:25px;
+    }
 
-.tema{
-    margin-bottom:15px;
-}
+    .usuario-box{
+        background:white;
+        border:1px solid #ddd;
+        border-radius:10px;
+        padding:20px;
+        margin-bottom:20px;
+    }
 
-.btn-tema{
-    width:100%;
-    background:#004481;
-    color:white;
-    border:none;
-    padding:15px;
-    text-align:left;
-    cursor:pointer;
-    border-radius:8px;
-    font-size:18px;
-    font-weight:bold;
-}
+    .usuario-box h2{
+        color:#004481;
+        margin-bottom:15px;
+    }
 
-.btn-tema:hover{
-    background:#0066c2;
-}
+    .usuario-box input{
+        width:100%;
+        padding:12px;
+        border:1px solid #ccc;
+        border-radius:6px;
+        font-size:15px;
+    }
 
-.contenido{
-    display:none;
-    background:white;
-    border-radius:0 0 8px 8px;
-    padding:10px;
-    border:1px solid #ddd;
-}
+    .tema{
+        margin-bottom:15px;
+    }
 
-.subtema{
-    margin-top:10px;
-}
+    .btn-tema{
+        width:100%;
+        background:#004481;
+        color:white;
+        border:none;
+        padding:15px;
+        text-align:left;
+        cursor:pointer;
+        border-radius:8px;
+        font-size:18px;
+        font-weight:bold;
+    }
 
-.btn-subtema{
-    width:100%;
-    background:#e9eef5;
-    color:#333;
-    border:none;
-    padding:12px;
-    text-align:left;
-    cursor:pointer;
-    border-radius:6px;
-    font-weight:bold;
-}
+    .btn-tema:hover{
+        background:#0066c2;
+    }
 
-.btn-subtema:hover{
-    background:#d5e3f5;
-}
+    .contenido{
+        display:none;
+        background:white;
+        border-radius:0 0 8px 8px;
+        padding:10px;
+        border:1px solid #ddd;
+    }
 
-.casos{
-    display:none;
-    margin-top:5px;
-    margin-left:15px;
-}
+    .subtema{
+        margin-top:10px;
+    }
 
-.caso{
-    background:#f7f7f7;
-    padding:10px;
-    margin:5px 0;
-    border-left:4px solid #004481;
-    cursor:pointer;
-    border-radius:4px;
-    transition:0.2s;
-}
+    .btn-subtema{
+        width:100%;
+        background:#e9eef5;
+        color:#333;
+        border:none;
+        padding:12px;
+        text-align:left;
+        cursor:pointer;
+        border-radius:6px;
+        font-weight:bold;
+    }
 
-.caso:hover{
-    background:#ececec;
-    padding-left:15px;
-}
+    .btn-subtema:hover{
+        background:#d5e3f5;
+    }
 
+    .casos{
+        display:none;
+        margin-top:5px;
+        margin-left:15px;
+    }
+
+    .caso{
+        background:#f7f7f7;
+        padding:12px;
+        margin:5px 0;
+        border-left:4px solid #004481;
+        cursor:pointer;
+        border-radius:4px;
+        transition:0.2s;
+    }
+
+    .caso:hover{
+        background:#ececec;
+        padding-left:16px;
+    }
+
+    .panel-activo{
+        display:none;
+        margin-top:25px;
+        background:white;
+        border:1px solid #ddd;
+        border-radius:10px;
+        padding:20px;
+    }
+
+    .panel-activo h2{
+        color:#004481;
+        margin-bottom:15px;
+    }
+
+    .dato{
+        margin-bottom:10px;
+    }
+
+    .dato strong{
+        color:#333;
+    }
+
+    .form-group{
+        margin-top:15px;
+    }
+
+    .form-group label{
+        display:block;
+        margin-bottom:6px;
+        font-weight:bold;
+    }
+
+    .form-group input,
+    .form-group textarea{
+        width:100%;
+        padding:12px;
+        border:1px solid #ccc;
+        border-radius:6px;
+        font-size:15px;
+    }
+
+    .form-group textarea{
+        min-height:100px;
+        resize:vertical;
+    }
+
+    .acciones{
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        margin-top:18px;
+    }
+
+    .btn{
+        border:none;
+        padding:12px 18px;
+        border-radius:6px;
+        cursor:pointer;
+        font-weight:bold;
+        font-size:14px;
+    }
+
+    .btn-guardar{
+        background:#004481;
+        color:white;
+    }
+
+    .btn-xira{
+        background:#e91e3a;
+        color:white;
+    }
+
+    .btn-cancelar{
+        background:#777;
+        color:white;
+    }
+
+    .historial{
+        margin-top:30px;
+        background:white;
+        border:1px solid #ddd;
+        border-radius:10px;
+        padding:20px;
+    }
+
+    .historial h2{
+        color:#004481;
+        margin-bottom:15px;
+    }
+
+    .tabla-contenedor{
+        overflow-x:auto;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        min-width:850px;
+    }
+
+    th{
+        background:#004481;
+        color:white;
+        padding:10px;
+        text-align:left;
+    }
+
+    td{
+        border-bottom:1px solid #ddd;
+        padding:10px;
+        vertical-align:top;
+    }
+
+    tr:hover{
+        background:#f7f7f7;
+    }
+
+    .estado-iniciado{
+        color:#d98300;
+        font-weight:bold;
+    }
+
+    .estado-finalizado{
+        color:green;
+        font-weight:bold;
+    }
+
+    .btn-borrar{
+        background:#c62828;
+        color:white;
+        border:none;
+        padding:6px 10px;
+        border-radius:4px;
+        cursor:pointer;
+    }
+
+    .mensaje-vacio{
+        color:#777;
+        padding:15px 0;
+    }
+
+    @media(max-width:700px){
+        body{
+            padding:10px;
+        }
+
+        h1{
+            font-size:23px;
+        }
+
+        .acciones{
+            flex-direction:column;
+        }
+
+        .btn{
+            width:100%;
+        }
+    }
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>Base de Conocimiento BBVA</h1>
-
-
-<!-- ================================================= -->
-<!-- AUTODESBLOQUEO -->
-<!-- ================================================= -->
-
-<div class="tema">
-
-<button class="btn-tema" onclick="toggle('auto')">
-Autodesbloqueo
-</button>
-
-<div class="contenido" id="auto">
-
-
-<!-- SOMOS -->
-
-<div class="subtema">
-
-<button class="btn-subtema" onclick="toggle('somos')">
-SOMOS
-</button>
-
-<div class="casos" id="somos">
-
-<div class="caso"
-onclick="abrirSimulador('Acudir a Sucursal')">
-Acudir a Sucursal
-</div>
-
-<div class="caso"
-onclick="abrirSimulador('Canalización con la DAR')">
-Canalización con la DAR
-</div>
-
-</div>
-</div>
-
-
-<!-- MODO AVION -->
-
-<div class="subtema">
-
-<button class="btn-subtema" onclick="toggle('modoavion')">
-Modo Avión
-</button>
-
-<div class="casos" id="modoavion">
-
-<div class="caso"
-onclick="abrirSimulador('Si logra ingresar')">
-Si logra ingresar
-</div>
-
-<div class="caso"
-onclick="abrirSimulador('No logra ingresar')">
-No logra ingresar
-</div>
-
-</div>
-</div>
-
-
-<!-- HPD -->
-
-<div class="subtema">
-
-<button class="btn-subtema" onclick="toggle('hpd')">
-HPD
-</button>
-
-<div class="casos" id="hpd">
-
-<div class="caso"
-onclick="abrirSimulador('Desbloqueo con compañero')">
-Desbloqueo con compañero
-</div>
-
-<div class="caso"
-onclick="abrirSimulador('Desbloqueo desde la intranet')">
-Desbloqueo desde la intranet
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
-
-
-<!-- ================================================= -->
-<!-- PERIFERICOS -->
-<!-- ================================================= -->
-
-<div class="tema">
-
-<button class="btn-tema" onclick="toggle('perifericos')">
-Periféricos de Oficina
-</button>
-
-<div class="contenido" id="perifericos">
-
-
-<!-- CPU -->
-
-<div class="subtema">
-
-<button class="btn-subtema" onclick="toggle('cpu')">
-CPU
-</button>
-
-<div class="casos" id="cpu">
-
-<div class="caso"
-onclick="abrirSimulador('Banca PyME')">
-Banca PyME
-</div>
-
-<div class="caso"
-onclick="abrirSimulador('Proceso HW CPU')">
-Proceso HW
-</div>
-
-</div>
-</div>
-
-
-<!-- TECLADO -->
-
-<div class="subtema">
-
-<button class="btn-subtema" onclick="toggle('teclado')">
-Teclado
-</button>
-
-<div class="casos" id="teclado">
-
-<div class="caso"
-onclick="abrirSimulador('Proceso HW Teclado')">
-Proceso HW
-</div>
-
-<div class="caso"
-onclick="abrirSimulador('Generación de reporte en SN')">
-Generación de reporte en SN
-</div>
-
-</div>
-</div>
-
-
-<!-- MOUSE -->
-
-<div class="subtema">
-
-<button class="btn-subtema" onclick="toggle('mouse')">
-Mouse
-</button>
-
-<div class="casos" id="mouse">
-
-<div class="caso"
-onclick="abrirSimulador('Proceso HW Mouse')">
-Proceso HW
-</div>
-
-<div class="caso"
-onclick="abrirSimulador('Conexión correcta')">
-Conexión correcta
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
-
-
-<!-- ================================================= -->
-<!-- VERSIONADO -->
-<!-- ================================================= -->
-
-<div class="tema">
-
-<button class="btn-tema" onclick="toggle('versionado')">
-Versionado
-</button>
-
-<div class="contenido" id="versionado">
-
-
-<!-- CIRCUITO -->
-
-<div class="subtema">
-
-<button class="btn-subtema" onclick="toggle('circuito')">
-Circuito de Contratación
-</button>
-
-<div class="casos" id="circuito">
-
-<div class="caso"
-onclick="abrirSimulador('TDC')">
-TDC
-</div>
-
-<div class="caso"
-onclick="abrirSimulador('Consumo')">
-Consumo
-</div>
-
-</div>
-</div>
-
-
-<!-- LINK CARD -->
-
-<div class="subtema">
-
-<button class="btn-subtema" onclick="toggle('linkcard')">
-Link Card
-</button>
-
-<div class="casos" id="linkcard">
-
-<div class="caso"
-onclick="abrirSimulador('Formulario')">
-Formulario
-</div>
-
-<div class="caso"
-onclick="abrirSimulador('Enrolamiento Tutor')">
-Enrolamiento Tutor
-</div>
-
-</div>
-</div>
-
-
-<!-- SOFT TOKEN -->
-
-<div class="subtema">
-
-<button class="btn-subtema" onclick="toggle('softtoken')">
-Soft Token
-</button>
-
-<div class="casos" id="softtoken">
-
-<div class="caso"
-onclick="abrirSimulador('Token Cronto')">
-Token Cronto
-</div>
-
-<div class="caso"
-onclick="abrirSimulador('Token Digital Gema')">
-Token Digital Gema
-</div>
-
-</div>
-</div>
-
-</div>
-</div>
+    <h1>Portal de Simulación BBVA</h1>
+    <p class="subtitulo">
+        Selecciona el escenario que deseas practicar
+    </p>
+
+
+    <!-- USUARIO -->
+    <div class="usuario-box">
+        <h2>Datos del asesor</h2>
+
+        <input
+            type="text"
+            id="nombreAsesor"
+            placeholder="Ingresa nombre o número de empleado"
+        >
+    </div>
+
+
+    <!-- AUTODESBLOQUEO -->
+    <div class="tema">
+
+        <button
+            class="btn-tema"
+            onclick="toggle('auto')"
+        >
+            Autodesbloqueo
+        </button>
+
+        <div class="contenido" id="auto">
+
+
+            <!-- SOMOS -->
+            <div class="subtema">
+
+                <button
+                    class="btn-subtema"
+                    onclick="toggle('somos')"
+                >
+                    SOMOS
+                </button>
+
+                <div class="casos" id="somos">
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Autodesbloqueo',
+                            'SOMOS',
+                            'Acudir a Sucursal'
+                        )"
+                    >
+                        Acudir a Sucursal
+                    </div>
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Autodesbloqueo',
+                            'SOMOS',
+                            'Canalización con la DAR'
+                        )"
+                    >
+                        Canalización con la DAR
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- MODO AVION -->
+            <div class="subtema">
+
+                <button
+                    class="btn-subtema"
+                    onclick="toggle('modoavion')"
+                >
+                    Modo Avión
+                </button>
+
+                <div class="casos" id="modoavion">
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Autodesbloqueo',
+                            'Modo Avión',
+                            'Si logra ingresar'
+                        )"
+                    >
+                        Si logra ingresar
+                    </div>
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Autodesbloqueo',
+                            'Modo Avión',
+                            'No logra ingresar'
+                        )"
+                    >
+                        No logra ingresar
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- HPD -->
+            <div class="subtema">
+
+                <button
+                    class="btn-subtema"
+                    onclick="toggle('hpd')"
+                >
+                    HPD
+                </button>
+
+                <div class="casos" id="hpd">
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Autodesbloqueo',
+                            'HPD',
+                            'Desbloqueo con compañero'
+                        )"
+                    >
+                        Desbloqueo con compañero
+                    </div>
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Autodesbloqueo',
+                            'HPD',
+                            'Desbloqueo desde la intranet'
+                        )"
+                    >
+                        Desbloqueo desde la intranet
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- PERIFERICOS -->
+    <div class="tema">
+
+        <button
+            class="btn-tema"
+            onclick="toggle('perifericos')"
+        >
+            Periféricos de Oficina
+        </button>
+
+        <div class="contenido" id="perifericos">
+
+
+            <!-- CPU -->
+            <div class="subtema">
+
+                <button
+                    class="btn-subtema"
+                    onclick="toggle('cpu')"
+                >
+                    CPU
+                </button>
+
+                <div class="casos" id="cpu">
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Periféricos de Oficina',
+                            'CPU',
+                            'Banca PyME'
+                        )"
+                    >
+                        Banca PyME
+                    </div>
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Periféricos de Oficina',
+                            'CPU',
+                            'Proceso HW'
+                        )"
+                    >
+                        Proceso HW
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- TECLADO -->
+            <div class="subtema">
+
+                <button
+                    class="btn-subtema"
+                    onclick="toggle('teclado')"
+                >
+                    Teclado
+                </button>
+
+                <div class="casos" id="teclado">
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Periféricos de Oficina',
+                            'Teclado',
+                            'Proceso HW'
+                        )"
+                    >
+                        Proceso HW
+                    </div>
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Periféricos de Oficina',
+                            'Teclado',
+                            'Generación de reporte en SN'
+                        )"
+                    >
+                        Generación de reporte en SN
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- MOUSE -->
+            <div class="subtema">
+
+                <button
+                    class="btn-subtema"
+                    onclick="toggle('mouse')"
+                >
+                    Mouse
+                </button>
+
+                <div class="casos" id="mouse">
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Periféricos de Oficina',
+                            'Mouse',
+                            'Proceso HW'
+                        )"
+                    >
+                        Proceso HW
+                    </div>
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Periféricos de Oficina',
+                            'Mouse',
+                            'Conexión correcta'
+                        )"
+                    >
+                        Conexión correcta
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- VERSIONADO -->
+    <div class="tema">
+
+        <button
+            class="btn-tema"
+            onclick="toggle('versionado')"
+        >
+            Versionado
+        </button>
+
+        <div class="contenido" id="versionado">
+
+
+            <!-- CIRCUITO -->
+            <div class="subtema">
+
+                <button
+                    class="btn-subtema"
+                    onclick="toggle('circuito')"
+                >
+                    Circuito de Contratación
+                </button>
+
+                <div class="casos" id="circuito">
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Versionado',
+                            'Circuito de Contratación',
+                            'TDC'
+                        )"
+                    >
+                        TDC
+                    </div>
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Versionado',
+                            'Circuito de Contratación',
+                            'Consumo'
+                        )"
+                    >
+                        Consumo
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- LINK CARD -->
+            <div class="subtema">
+
+                <button
+                    class="btn-subtema"
+                    onclick="toggle('linkcard')"
+                >
+                    Link Card
+                </button>
+
+                <div class="casos" id="linkcard">
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Versionado',
+                            'Link Card',
+                            'Formulario'
+                        )"
+                    >
+                        Formulario
+                    </div>
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Versionado',
+                            'Link Card',
+                            'Enrolamiento Tutor'
+                        )"
+                    >
+                        Enrolamiento Tutor
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- SOFT TOKEN -->
+            <div class="subtema">
+
+                <button
+                    class="btn-subtema"
+                    onclick="toggle('softtoken')"
+                >
+                    Soft Token
+                </button>
+
+                <div class="casos" id="softtoken">
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Versionado',
+                            'Soft Token',
+                            'Token Cronto'
+                        )"
+                    >
+                        Token Cronto
+                    </div>
+
+                    <div
+                        class="caso"
+                        onclick="iniciarEscenario(
+                            'Versionado',
+                            'Soft Token',
+                            'Token Digital Gema'
+                        )"
+                    >
+                        Token Digital Gema
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- PANEL DE SIMULACION ACTIVA -->
+    <div class="panel-activo" id="panelActivo">
+
+        <h2>Simulación en curso</h2>
+
+        <div class="dato">
+            <strong>Asesor:</strong>
+            <span id="activoAsesor"></span>
+        </div>
+
+        <div class="dato">
+            <strong>Tema:</strong>
+            <span id="activoTema"></span>
+        </div>
+
+        <div class="dato">
+            <strong>Subtema:</strong>
+            <span id="activoSubtema"></span>
+        </div>
+
+        <div class="dato">
+            <strong>Caso:</strong>
+            <span id="activoCaso"></span>
+        </div>
+
+        <div class="dato">
+            <strong>Inicio:</strong>
+            <span id="activoFecha"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label for="calificacion">
+                Calificación obtenida
+            </label>
+
+            <input
+                type="number"
+                id="calificacion"
+                min="0"
+                max="100"
+                placeholder="Ejemplo: 93"
+            >
+        </div>
+
+
+        <div class="form-group">
+            <label for="observaciones">
+                Observaciones o retroalimentación
+            </label>
+
+            <textarea
+                id="observaciones"
+                placeholder="Puedes copiar aquí la retroalimentación de Xira..."
+            ></textarea>
+        </div>
+
+
+        <div class="acciones">
+
+            <button
+                class="btn btn-xira"
+                onclick="abrirXira()"
+            >
+                Abrir Xira nuevamente
+            </button>
+
+            <button
+                class="btn btn-guardar"
+                onclick="finalizarSimulacion()"
+            >
+                Guardar resultado
+            </button>
+
+            <button
+                class="btn btn-cancelar"
+                onclick="cancelarSimulacion()"
+            >
+                Cancelar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- HISTORIAL -->
+    <div class="historial">
+
+        <h2>Historial de simulaciones</h2>
+
+        <div class="tabla-contenedor">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Asesor</th>
+                        <th>Tema</th>
+                        <th>Subtema</th>
+                        <th>Caso</th>
+                        <th>Fecha</th>
+                        <th>Calificación</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaHistorial">
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div
+            class="mensaje-vacio"
+            id="mensajeVacio"
+        >
+            Todavía no existen simulaciones registradas.
+        </div>
+
+    </div>
 
 </div>
 
 
 <script>
 
-/* =========================================
-   ABRIR Y CERRAR MENÚS
-========================================= */
+const URL_XIRA =
+"https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config";
+
+let simulacionActiva = null;
+
+
+/* ==========================================
+   ABRIR / CERRAR MENUS
+========================================== */
 
 function toggle(id){
 
-    const elemento = document.getElementById(id);
+    const elemento =
+        document.getElementById(id);
 
     if(elemento.style.display === "block"){
         elemento.style.display = "none";
-    }
-    else{
+    }else{
         elemento.style.display = "block";
     }
 
 }
 
 
-/* =========================================
-   ABRIR SIMULADOR
-========================================= */
+/* ==========================================
+   INICIAR ESCENARIO
+========================================== */
 
-function abrirSimulador(escenario){
+function iniciarEscenario(
+    tema,
+    subtema,
+    caso
+){
+
+    const asesor =
+        document
+        .getElementById("nombreAsesor")
+        .value
+        .trim();
+
+    if(!asesor){
+
+        alert(
+            "Primero ingresa el nombre o número de empleado del asesor."
+        );
+
+        document
+        .getElementById("nombreAsesor")
+        .focus();
+
+        return;
+    }
+
+
+    const fecha =
+        new Date()
+        .toLocaleString("es-MX");
+
+
+    simulacionActiva = {
+
+        id: Date.now(),
+
+        asesor: asesor,
+
+        tema: tema,
+
+        subtema: subtema,
+
+        caso: caso,
+
+        fecha: fecha,
+
+        estado: "Iniciado",
+
+        calificacion: "",
+
+        observaciones: ""
+
+    };
+
 
     localStorage.setItem(
-        "escenarioSeleccionado",
-        escenario
+        "simulacionActiva",
+        JSON.stringify(simulacionActiva)
     );
 
+
+    mostrarPanelActivo();
+
+
+    registrarInicio(
+        simulacionActiva
+    );
+
+
+    abrirXira();
+
+}
+
+
+/* ==========================================
+   REGISTRAR INICIO
+========================================== */
+
+function registrarInicio(simulacion){
+
+    let historial =
+        obtenerHistorial();
+
+
+    const existe =
+        historial.some(
+            item =>
+            item.id === simulacion.id
+        );
+
+
+    if(!existe){
+
+        historial.unshift(
+            simulacion
+        );
+
+        guardarHistorial(
+            historial
+        );
+
+    }
+
+
+    renderHistorial();
+
+}
+
+
+/* ==========================================
+   ABRIR XIRA
+========================================== */
+
+function abrirXira(){
+
     window.open(
-        "https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config",
+        URL_XIRA,
         "_blank"
     );
+
 }
+
+
+/* ==========================================
+   MOSTRAR SIMULACION ACTIVA
+========================================== */
+
+function mostrarPanelActivo(){
+
+    if(!simulacionActiva){
+        return;
+    }
+
+
+    document
+    .getElementById("panelActivo")
+    .style.display = "block";
+
+
+    document
+    .getElementById("activoAsesor")
+    .textContent =
+        simulacionActiva.asesor;
+
+
+    document
+    .getElementById("activoTema")
+    .textContent =
+        simulacionActiva.tema;
+
+
+    document
+    .getElementById("activoSubtema")
+    .textContent =
+        simulacionActiva.subtema;
+
+
+    document
+    .getElementById("activoCaso")
+    .textContent =
+        simulacionActiva.caso;
+
+
+    document
+    .getElementById("activoFecha")
+    .textContent =
+        simulacionActiva.fecha;
+
+
+    document
+    .getElementById("calificacion")
+    .value =
+        simulacionActiva.calificacion || "";
+
+
+    document
+    .getElementById("observaciones")
+    .value =
+        simulacionActiva.observaciones || "";
+
+
+    document
+    .getElementById("panelActivo")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ==========================================
+   FINALIZAR SIMULACION
+========================================== */
+
+function finalizarSimulacion(){
+
+    if(!simulacionActiva){
+
+        alert(
+            "No existe una simulación activa."
+        );
+
+        return;
+
+    }
+
+
+    const calificacion =
+        document
+        .getElementById("calificacion")
+        .value;
+
+
+    const observaciones =
+        document
+        .getElementById("observaciones")
+        .value
+        .trim();
+
+
+    if(calificacion === ""){
+
+        alert(
+            "Ingresa la calificación obtenida."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        Number(calificacion) < 0 ||
+        Number(calificacion) > 100
+    ){
+
+        alert(
+            "La calificación debe estar entre 0 y 100."
+        );
+
+        return;
+
+    }
+
+
+    simulacionActiva.calificacion =
+        Number(calificacion);
+
+
+    simulacionActiva.observaciones =
+        observaciones;
+
+
+    simulacionActiva.estado =
+        "Finalizado";
+
+
+    simulacionActiva.fechaFinal =
+        new Date()
+        .toLocaleString("es-MX");
+
+
+    let historial =
+        obtenerHistorial();
+
+
+    historial =
+        historial.map(
+            item => {
+
+                if(
+                    item.id ===
+                    simulacionActiva.id
+                ){
+
+                    return simulacionActiva;
+
+                }
+
+                return item;
+
+            }
+        );
+
+
+    guardarHistorial(
+        historial
+    );
+
+
+    localStorage.removeItem(
+        "simulacionActiva"
+    );
+
+
+    simulacionActiva = null;
+
+
+    document
+    .getElementById("panelActivo")
+    .style.display = "none";
+
+
+    document
+    .getElementById("calificacion")
+    .value = "";
+
+
+    document
+    .getElementById("observaciones")
+    .value = "";
+
+
+    renderHistorial();
+
+
+    alert(
+        "Resultado guardado correctamente."
+    );
+
+}
+
+
+/* ==========================================
+   CANCELAR SIMULACION
+========================================== */
+
+function cancelarSimulacion(){
+
+    if(!simulacionActiva){
+        return;
+    }
+
+
+    const confirmar =
+        confirm(
+            "¿Deseas cancelar esta simulación?"
+        );
+
+
+    if(!confirmar){
+        return;
+    }
+
+
+    let historial =
+        obtenerHistorial();
+
+
+    historial =
+        historial.filter(
+            item =>
+            item.id !==
+            simulacionActiva.id
+        );
+
+
+    guardarHistorial(
+        historial
+    );
+
+
+    localStorage.removeItem(
+        "simulacionActiva"
+    );
+
+
+    simulacionActiva = null;
+
+
+    document
+    .getElementById("panelActivo")
+    .style.display = "none";
+
+
+    renderHistorial();
+
+}
+
+
+/* ==========================================
+   HISTORIAL
+========================================== */
+
+function obtenerHistorial(){
+
+    const datos =
+        localStorage.getItem(
+            "historialSimulaciones"
+        );
+
+
+    if(!datos){
+        return [];
+    }
+
+
+    try{
+
+        return JSON.parse(datos);
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+
+function guardarHistorial(historial){
+
+    localStorage.setItem(
+        "historialSimulaciones",
+        JSON.stringify(historial)
+    );
+
+}
+
+
+/* ==========================================
+   MOSTRAR HISTORIAL
+========================================== */
+
+function renderHistorial(){
+
+    const historial =
+        obtenerHistorial();
+
+
+    const tabla =
+        document.getElementById(
+            "tablaHistorial"
+        );
+
+
+    const vacio =
+        document.getElementById(
+            "mensajeVacio"
+        );
+
+
+    tabla.innerHTML = "";
+
+
+    if(historial.length === 0){
+
+        vacio.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    vacio.style.display =
+        "none";
+
+
+    historial.forEach(
+        item => {
+
+            const fila =
+                document.createElement(
+                    "tr"
+                );
+
+
+            const claseEstado =
+                item.estado === "Finalizado"
+                ? "estado-finalizado"
+                : "estado-iniciado";
+
+
+            fila.innerHTML = `
+
+                <td>
+                    ${escaparHTML(item.asesor)}
+                </td>
+
+                <td>
+                    ${escaparHTML(item.tema)}
+                </td>
+
+                <td>
+                    ${escaparHTML(item.subtema)}
+                </td>
+
+                <td>
+                    ${escaparHTML(item.caso)}
+                </td>
+
+                <td>
+                    ${escaparHTML(item.fecha)}
+                </td>
+
+                <td>
+                    ${
+                        item.calificacion !== ""
+                        ?
+                        item.calificacion + "%"
+                        :
+                        "-"
+                    }
+                </td>
+
+                <td class="${claseEstado}">
+                    ${item.estado}
+                </td>
+
+                <td>
+                    <button
+                        class="btn-borrar"
+                        onclick="borrarRegistro(${item.id})"
+                    >
+                        Borrar
+                    </button>
+                </td>
+
+            `;
+
+
+            tabla.appendChild(
+                fila
+            );
+
+        }
+    );
+
+}
+
+
+/* ==========================================
+   BORRAR REGISTRO
+========================================== */
+
+function borrarRegistro(id){
+
+    const confirmar =
+        confirm(
+            "¿Deseas borrar este registro?"
+        );
+
+
+    if(!confirmar){
+        return;
+    }
+
+
+    let historial =
+        obtenerHistorial();
+
+
+    historial =
+        historial.filter(
+            item =>
+            item.id !== id
+        );
+
+
+    guardarHistorial(
+        historial
+    );
+
+
+    renderHistorial();
+
+}
+
+
+/* ==========================================
+   SEGURIDAD PARA MOSTRAR TEXTO
+========================================== */
+
+function escaparHTML(texto){
+
+    if(
+        texto === null ||
+        texto === undefined
+    ){
+        return "";
+    }
+
+
+    return String(texto)
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* ==========================================
+   RECUPERAR SIMULACION ACTIVA
+========================================== */
+
+function recuperarSimulacionActiva(){
+
+    const guardada =
+        localStorage.getItem(
+            "simulacionActiva"
+        );
+
+
+    if(!guardada){
+        return;
+    }
+
+
+    try{
+
+        simulacionActiva =
+            JSON.parse(
+                guardada
+            );
+
+
+        document
+        .getElementById(
+            "nombreAsesor"
+        )
+        .value =
+            simulacionActiva.asesor;
+
+
+        mostrarPanelActivo();
+
+    }catch(error){
+
+        simulacionActiva = null;
+
+    }
+
+}
+
+
+/* ==========================================
+   INICIO
+========================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        recuperarSimulacionActiva();
+
+        renderHistorial();
+
+    }
+);
 
 </script>
 
