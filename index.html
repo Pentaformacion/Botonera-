@@ -762,17 +762,21 @@ function iniciarEscenario(tema, subtema, caso){
 
 function abrirXira(){
 
-    // Abre Xira
+    // Primera liga: Xira
     window.open(
         "https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config",
         "_blank"
     );
 
-    // Abre Pantallas Negras
-    window.open(
-        "https://pentaformacion.github.io/Pantallas-negras/",
-        "_blank"
-    );
+    // Segunda liga: Pantallas Negras
+    setTimeout(function(){
+
+        window.open(
+            "https://pentaformacion.github.io/Pantallas-negras/",
+            "_blank"
+        );
+
+    }, 500);
 
 }
 
