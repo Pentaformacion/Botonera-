@@ -762,24 +762,27 @@ function iniciarEscenario(tema, subtema, caso){
 
 function abrirXira(){
 
-    // Primera liga: Xira
-    window.open(
-        "https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config",
+    const pestañaXira = window.open(
+        "",
         "_blank"
     );
 
-    // Segunda liga: Pantallas Negras
-    setTimeout(function(){
+    const pestañaPantallas = window.open(
+        "",
+        "_blank"
+    );
 
-        window.open(
-            "https://pentaformacion.github.io/Pantallas-negras/",
-            "_blank"
-        );
+    if(pestañaXira){
+        pestañaXira.location.href =
+        "https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config";
+    }
 
-    }, 500);
+    if(pestañaPantallas){
+        pestañaPantallas.location.href =
+        "https://pentaformacion.github.io/Pantallas-negras/";
+    }
 
 }
-
 
 /* =============================
    DETECTAR RESULTADO
