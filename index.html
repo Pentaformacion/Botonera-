@@ -3,713 +3,1115 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Portal de Simulación BBVA</title>
 
 <style>
-    *{
-        margin:0;
-        padding:0;
-        box-sizing:border-box;
-        font-family:Arial, sans-serif;
-    }
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f6f9;
+    padding:20px;
+    color:#222;
+}
+
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
+h1{
+    text-align:center;
+    color:#004481;
+    margin-bottom:8px;
+}
+
+.subtitulo{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+/* =========================
+   TARJETAS
+========================= */
+
+.card{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:10px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.card h2{
+    color:#004481;
+    margin-bottom:15px;
+}
+
+/* =========================
+   ASESOR
+========================= */
+
+.usuario-box input,
+.form-group input,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+}
+
+/* =========================
+   TEMAS
+========================= */
+
+.tema{
+    margin-bottom:15px;
+}
+
+.btn-tema{
+    width:100%;
+    background:#004481;
+    color:white;
+    border:none;
+    padding:15px;
+    text-align:left;
+    cursor:pointer;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.btn-tema:hover{
+    background:#0066c2;
+}
+
+.contenido{
+    display:none;
+    background:white;
+    border:1px solid #ddd;
+    border-top:none;
+    border-radius:0 0 8px 8px;
+    padding:10px;
+}
+
+/* =========================
+   SUBTEMAS
+========================= */
+
+.subtema{
+    margin-top:10px;
+}
+
+.btn-subtema{
+    width:100%;
+    background:#e9eef5;
+    color:#333;
+    border:none;
+    padding:12px;
+    text-align:left;
+    cursor:pointer;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+.btn-subtema:hover{
+    background:#d5e3f5;
+}
+
+.casos{
+    display:none;
+    margin-top:6px;
+    margin-left:15px;
+}
+
+.caso{
+    background:#f7f7f7;
+    padding:12px;
+    margin:5px 0;
+    border-left:4px solid #004481;
+    cursor:pointer;
+    border-radius:4px;
+    transition:.2s;
+}
+
+.caso:hover{
+    background:#ececec;
+    padding-left:16px;
+}
+
+/* =========================
+   SIMULACIÓN ACTIVA
+========================= */
+
+#panelActivo{
+    display:none;
+}
+
+.dato{
+    margin-bottom:10px;
+}
+
+.form-group{
+    margin-top:15px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:bold;
+}
+
+.form-group textarea{
+    min-height:140px;
+    resize:vertical;
+}
+
+.estado-box{
+    margin-top:15px;
+    padding:12px;
+    border-radius:6px;
+    background:#fff8e1;
+    color:#8a6500;
+    font-weight:bold;
+}
+
+.estado-box.ok{
+    background:#e8f5e9;
+    color:#2e7d32;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.acciones{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:18px;
+}
+
+.btn{
+    border:none;
+    padding:12px 18px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.btn-xira{
+    background:#e91e3a;
+    color:white;
+}
+
+.btn-pantallas{
+    background:#1976d2;
+    color:white;
+}
+
+.btn-guardar{
+    background:#004481;
+    color:white;
+}
+
+.btn-cancelar{
+    background:#777;
+    color:white;
+}
+
+/* =========================
+   HISTORIAL
+========================= */
+
+.tabla-contenedor{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:950px;
+}
+
+th{
+    background:#004481;
+    color:white;
+    padding:10px;
+    text-align:left;
+}
+
+td{
+    border-bottom:1px solid #ddd;
+    padding:10px;
+    vertical-align:top;
+}
+
+.estado-iniciado{
+    color:#d98300;
+    font-weight:bold;
+}
+
+.estado-finalizado{
+    color:green;
+    font-weight:bold;
+}
+
+.btn-borrar{
+    background:#c62828;
+    color:white;
+    border:none;
+    padding:6px 10px;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+/* =========================
+   PANTALLAS NEGRAS
+========================= */
+
+#panelPantallas{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:white;
+    z-index:999999;
+}
+
+.barra-pantallas{
+    height:60px;
+    background:#004481;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 20px;
+}
+
+.barra-pantallas h3{
+    font-size:18px;
+}
+
+.acciones-pantallas{
+    display:flex;
+    gap:10px;
+}
+
+.btn-pantalla-barra{
+    border:none;
+    padding:9px 15px;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-nueva-pestana{
+    background:white;
+    color:#004481;
+}
+
+.btn-cerrar-pantalla{
+    background:#e91e3a;
+    color:white;
+}
+
+#iframePantallas{
+    width:100%;
+    height:calc(100% - 60px);
+    border:none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px){
 
     body{
-        background:#f4f6f9;
-        padding:20px;
-        color:#222;
-    }
-
-    .container{
-        max-width:1100px;
-        margin:auto;
-    }
-
-    h1{
-        text-align:center;
-        color:#004481;
-        margin-bottom:8px;
-    }
-
-    .subtitulo{
-        text-align:center;
-        color:#666;
-        margin-bottom:25px;
-    }
-
-    .usuario-box,
-    .panel-activo,
-    .historial{
-        background:white;
-        border:1px solid #ddd;
-        border-radius:10px;
-        padding:20px;
-        margin-bottom:20px;
-    }
-
-    .usuario-box h2,
-    .panel-activo h2,
-    .historial h2{
-        color:#004481;
-        margin-bottom:15px;
-    }
-
-    .usuario-box input,
-    .form-group input,
-    .form-group textarea{
-        width:100%;
-        padding:12px;
-        border:1px solid #ccc;
-        border-radius:6px;
-        font-size:15px;
-    }
-
-    .tema{
-        margin-bottom:15px;
-    }
-
-    .btn-tema{
-        width:100%;
-        background:#004481;
-        color:white;
-        border:none;
-        padding:15px;
-        text-align:left;
-        cursor:pointer;
-        border-radius:8px;
-        font-size:18px;
-        font-weight:bold;
-    }
-
-    .btn-tema:hover{
-        background:#0066c2;
-    }
-
-    .contenido{
-        display:none;
-        background:white;
-        border-radius:0 0 8px 8px;
         padding:10px;
-        border:1px solid #ddd;
-    }
-
-    .subtema{
-        margin-top:10px;
-    }
-
-    .btn-subtema{
-        width:100%;
-        background:#e9eef5;
-        color:#333;
-        border:none;
-        padding:12px;
-        text-align:left;
-        cursor:pointer;
-        border-radius:6px;
-        font-weight:bold;
-    }
-
-    .btn-subtema:hover{
-        background:#d5e3f5;
-    }
-
-    .casos{
-        display:none;
-        margin-top:5px;
-        margin-left:15px;
-    }
-
-    .caso{
-        background:#f7f7f7;
-        padding:12px;
-        margin:5px 0;
-        border-left:4px solid #004481;
-        cursor:pointer;
-        border-radius:4px;
-        transition:0.2s;
-    }
-
-    .caso:hover{
-        background:#ececec;
-        padding-left:16px;
-    }
-
-    .panel-activo{
-        display:none;
-        margin-top:25px;
-    }
-
-    .dato{
-        margin-bottom:10px;
-    }
-
-    .form-group{
-        margin-top:15px;
-    }
-
-    .form-group label{
-        display:block;
-        margin-bottom:6px;
-        font-weight:bold;
-    }
-
-    .form-group textarea{
-        min-height:120px;
-        resize:vertical;
-    }
-
-    .resultado-box{
-        margin-top:20px;
-        background:#f8fbff;
-        border:1px dashed #7ba7cf;
-        border-radius:8px;
-        padding:15px;
-    }
-
-    .resultado-box h3{
-        color:#004481;
-        margin-bottom:10px;
     }
 
     .acciones{
-        display:flex;
-        gap:10px;
-        flex-wrap:wrap;
-        margin-top:18px;
+        flex-direction:column;
     }
 
     .btn{
-        border:none;
-        padding:12px 18px;
-        border-radius:6px;
-        cursor:pointer;
-        font-weight:bold;
+        width:100%;
+    }
+
+    .barra-pantallas h3{
         font-size:14px;
     }
 
-    .btn-guardar{
-        background:#004481;
-        color:white;
-    }
+}
 
-    .btn-xira{
-        background:#e91e3a;
-        color:white;
-    }
-
-    .btn-cancelar{
-        background:#777;
-        color:white;
-    }
-
-    .btn-detectar{
-        background:#1473e6;
-        color:white;
-        margin-top:10px;
-    }
-
-    .tabla-contenedor{
-        overflow-x:auto;
-    }
-
-    table{
-        width:100%;
-        border-collapse:collapse;
-        min-width:850px;
-    }
-
-    th{
-        background:#004481;
-        color:white;
-        padding:10px;
-        text-align:left;
-    }
-
-    td{
-        border-bottom:1px solid #ddd;
-        padding:10px;
-        vertical-align:top;
-    }
-
-    .estado-iniciado{
-        color:#d98300;
-        font-weight:bold;
-    }
-
-    .estado-finalizado{
-        color:green;
-        font-weight:bold;
-    }
-
-    .btn-borrar{
-        background:#c62828;
-        color:white;
-        border:none;
-        padding:6px 10px;
-        border-radius:4px;
-        cursor:pointer;
-    }
-
-    .mensaje{
-        margin-top:10px;
-        font-weight:bold;
-    }
-
-    .mensaje-ok{
-        color:green;
-    }
-
-    .mensaje-error{
-        color:#c62828;
-    }
-
-    @media(max-width:700px){
-        body{
-            padding:10px;
-        }
-
-        .acciones{
-            flex-direction:column;
-        }
-
-        .btn{
-            width:100%;
-        }
-    }
 </style>
 </head>
 
 <body>
 
+
+<!-- =====================================================
+     PORTAL
+===================================================== -->
+
 <div class="container">
 
-    <h1>Portal de Simulación BBVA</h1>
-    <p class="subtitulo">
-        Selecciona el escenario que deseas practicar
-    </p>
+<h1>Portal de Simulación BBVA</h1>
 
-    <div class="usuario-box">
-        <h2>Datos del asesor</h2>
+<p class="subtitulo">
+Selecciona el escenario que deseas practicar
+</p>
 
-        <input
-            type="text"
-            id="nombreAsesor"
-            placeholder="Ingresa nombre o número de empleado"
-        >
-    </div>
 
-    <!-- AUTODESBLOQUEO -->
-    <div class="tema">
+<!-- DATOS DEL ASESOR -->
 
-        <button class="btn-tema" onclick="toggle('auto')">
-            Autodesbloqueo
-        </button>
+<div class="card usuario-box">
 
-        <div class="contenido" id="auto">
+<h2>Datos del asesor</h2>
 
-            <div class="subtema">
-                <button class="btn-subtema" onclick="toggle('somos')">
-                    SOMOS
-                </button>
-
-                <div class="casos" id="somos">
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Autodesbloqueo','SOMOS','Acudir a Sucursal')">
-                        Acudir a Sucursal
-                    </div>
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Autodesbloqueo','SOMOS','Canalización con la DAR')">
-                        Canalización con la DAR
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="subtema">
-                <button class="btn-subtema" onclick="toggle('modoavion')">
-                    Modo Avión
-                </button>
-
-                <div class="casos" id="modoavion">
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Autodesbloqueo','Modo Avión','Si logra ingresar')">
-                        Si logra ingresar
-                    </div>
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Autodesbloqueo','Modo Avión','No logra ingresar')">
-                        No logra ingresar
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="subtema">
-                <button class="btn-subtema" onclick="toggle('hpd')">
-                    HPD
-                </button>
-
-                <div class="casos" id="hpd">
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Autodesbloqueo','HPD','Desbloqueo con compañero')">
-                        Desbloqueo con compañero
-                    </div>
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Autodesbloqueo','HPD','Desbloqueo desde la intranet')">
-                        Desbloqueo desde la intranet
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- PERIFERICOS -->
-    <div class="tema">
-
-        <button class="btn-tema" onclick="toggle('perifericos')">
-            Periféricos de Oficina
-        </button>
-
-        <div class="contenido" id="perifericos">
-
-            <div class="subtema">
-                <button class="btn-subtema" onclick="toggle('cpu')">
-                    CPU
-                </button>
-
-                <div class="casos" id="cpu">
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Periféricos de Oficina','CPU','Banca PyME')">
-                        Banca PyME
-                    </div>
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Periféricos de Oficina','CPU','Proceso HW')">
-                        Proceso HW
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="subtema">
-                <button class="btn-subtema" onclick="toggle('teclado')">
-                    Teclado
-                </button>
-
-                <div class="casos" id="teclado">
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Periféricos de Oficina','Teclado','Proceso HW')">
-                        Proceso HW
-                    </div>
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Periféricos de Oficina','Teclado','Generación de reporte en SN')">
-                        Generación de reporte en SN
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="subtema">
-                <button class="btn-subtema" onclick="toggle('mouse')">
-                    Mouse
-                </button>
-
-                <div class="casos" id="mouse">
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Periféricos de Oficina','Mouse','Proceso HW')">
-                        Proceso HW
-                    </div>
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Periféricos de Oficina','Mouse','Conexión correcta')">
-                        Conexión correcta
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- VERSIONADO -->
-    <div class="tema">
-
-        <button class="btn-tema" onclick="toggle('versionado')">
-            Versionado
-        </button>
-
-        <div class="contenido" id="versionado">
-
-            <div class="subtema">
-                <button class="btn-subtema" onclick="toggle('circuito')">
-                    Circuito de Contratación
-                </button>
-
-                <div class="casos" id="circuito">
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Versionado','Circuito de Contratación','TDC')">
-                        TDC
-                    </div>
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Versionado','Circuito de Contratación','Consumo')">
-                        Consumo
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="subtema">
-                <button class="btn-subtema" onclick="toggle('linkcard')">
-                    Link Card
-                </button>
-
-                <div class="casos" id="linkcard">
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Versionado','Link Card','Formulario')">
-                        Formulario
-                    </div>
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Versionado','Link Card','Enrolamiento Tutor')">
-                        Enrolamiento Tutor
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="subtema">
-                <button class="btn-subtema" onclick="toggle('softtoken')">
-                    Soft Token
-                </button>
-
-                <div class="casos" id="softtoken">
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Versionado','Soft Token','Token Cronto')">
-                        Token Cronto
-                    </div>
-
-                    <div class="caso"
-                         onclick="iniciarEscenario('Versionado','Soft Token','Token Digital Gema')">
-                        Token Digital Gema
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- PANEL ACTIVO -->
-    <div class="panel-activo" id="panelActivo">
-
-        <h2>Simulación en curso</h2>
-
-        <div class="dato">
-            <strong>Asesor:</strong>
-            <span id="activoAsesor"></span>
-        </div>
-
-        <div class="dato">
-            <strong>Tema:</strong>
-            <span id="activoTema"></span>
-        </div>
-
-        <div class="dato">
-            <strong>Subtema:</strong>
-            <span id="activoSubtema"></span>
-        </div>
-
-        <div class="dato">
-            <strong>Caso:</strong>
-            <span id="activoCaso"></span>
-        </div>
-
-        <div class="dato">
-            <strong>Inicio:</strong>
-            <span id="activoFecha"></span>
-        </div>
-
-        <div class="resultado-box">
-
-            <h3>Pegar resultado de Xira</h3>
-
-            <p>
-                Copia la retroalimentación o texto del resultado de Xira
-                y pégalo aquí.
-            </p>
-
-            <div class="form-group">
-                <textarea
-                    id="resultadoXira"
-                    placeholder="Ejemplo:
-
-score: 93
-
-Script de bienvenida: 10/10
-Sondeo e identificación de la falla: 20/20
-Aplicación del procedimiento: 30/30
-..."
-                ></textarea>
-            </div>
-
-            <button
-                class="btn btn-detectar"
-                onclick="detectarResultado()"
-            >
-                Detectar calificación
-            </button>
-
-            <div
-                id="mensajeDeteccion"
-                class="mensaje"
-            ></div>
-
-        </div>
-
-        <div class="form-group">
-
-            <label for="calificacion">
-                Calificación obtenida
-            </label>
-
-            <input
-                type="number"
-                id="calificacion"
-                min="0"
-                max="100"
-                placeholder="Ejemplo: 93"
-            >
-
-        </div>
-
-        <div class="form-group">
-
-            <label for="observaciones">
-                Observaciones o retroalimentación
-            </label>
-
-            <textarea
-                id="observaciones"
-                placeholder="La retroalimentación detectada aparecerá aquí..."
-            ></textarea>
-
-        </div>
-
-        <div class="acciones">
-
-            <button
-                class="btn btn-xira"
-                onclick="abrirXira()"
-            >
-                Abrir Xira nuevamente
-            </button>
-
-            <button
-                class="btn btn-guardar"
-                onclick="finalizarSimulacion()"
-            >
-                Guardar resultado
-            </button>
-
-            <button
-                class="btn btn-cancelar"
-                onclick="cancelarSimulacion()"
-            >
-                Cancelar
-            </button>
-
-        </div>
-
-    </div>
-
-    <!-- HISTORIAL -->
-    <div class="historial">
-
-        <h2>Historial de simulaciones</h2>
-
-        <div class="tabla-contenedor">
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>Asesor</th>
-                        <th>Tema</th>
-                        <th>Subtema</th>
-                        <th>Caso</th>
-                        <th>Fecha</th>
-                        <th>Calificación</th>
-                        <th>Estado</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-
-                <tbody id="tablaHistorial">
-                </tbody>
-
-            </table>
-
-        </div>
-
-        <div id="mensajeVacio">
-            Todavía no existen simulaciones registradas.
-        </div>
-
-    </div>
+<input
+    type="text"
+    id="nombreAsesor"
+    placeholder="Ingresa nombre o número de empleado"
+>
 
 </div>
 
+
+<!-- =====================================================
+     AUTODESBLOQUEO
+===================================================== -->
+
+<div class="tema">
+
+<button
+    class="btn-tema"
+    onclick="toggle('auto')"
+>
+Autodesbloqueo
+</button>
+
+<div
+    class="contenido"
+    id="auto"
+>
+
+
+<!-- SOMOS -->
+
+<div class="subtema">
+
+<button
+    class="btn-subtema"
+    onclick="toggle('somos')"
+>
+SOMOS
+</button>
+
+<div
+    class="casos"
+    id="somos"
+>
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Autodesbloqueo',
+        'SOMOS',
+        'Acudir a Sucursal'
+    )"
+>
+Acudir a Sucursal
+</div>
+
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Autodesbloqueo',
+        'SOMOS',
+        'Canalización con la DAR'
+    )"
+>
+Canalización con la DAR
+</div>
+
+</div>
+</div>
+
+
+<!-- MODO AVIÓN -->
+
+<div class="subtema">
+
+<button
+    class="btn-subtema"
+    onclick="toggle('modoavion')"
+>
+Modo Avión
+</button>
+
+<div
+    class="casos"
+    id="modoavion"
+>
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Autodesbloqueo',
+        'Modo Avión',
+        'Si logra ingresar'
+    )"
+>
+Si logra ingresar
+</div>
+
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Autodesbloqueo',
+        'Modo Avión',
+        'No logra ingresar'
+    )"
+>
+No logra ingresar
+</div>
+
+</div>
+</div>
+
+
+<!-- HPD -->
+
+<div class="subtema">
+
+<button
+    class="btn-subtema"
+    onclick="toggle('hpd')"
+>
+HPD
+</button>
+
+<div
+    class="casos"
+    id="hpd"
+>
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Autodesbloqueo',
+        'HPD',
+        'Desbloqueo con compañero'
+    )"
+>
+Desbloqueo con compañero
+</div>
+
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Autodesbloqueo',
+        'HPD',
+        'Desbloqueo desde la intranet'
+    )"
+>
+Desbloqueo desde la intranet
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+<!-- =====================================================
+     PERIFÉRICOS
+===================================================== -->
+
+<div class="tema">
+
+<button
+    class="btn-tema"
+    onclick="toggle('perifericos')"
+>
+Periféricos de Oficina
+</button>
+
+<div
+    class="contenido"
+    id="perifericos"
+>
+
+
+<!-- CPU -->
+
+<div class="subtema">
+
+<button
+    class="btn-subtema"
+    onclick="toggle('cpu')"
+>
+CPU
+</button>
+
+<div
+    class="casos"
+    id="cpu"
+>
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Periféricos de Oficina',
+        'CPU',
+        'Banca PyME'
+    )"
+>
+Banca PyME
+</div>
+
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Periféricos de Oficina',
+        'CPU',
+        'Proceso HW'
+    )"
+>
+Proceso HW
+</div>
+
+</div>
+</div>
+
+
+<!-- TECLADO -->
+
+<div class="subtema">
+
+<button
+    class="btn-subtema"
+    onclick="toggle('teclado')"
+>
+Teclado
+</button>
+
+<div
+    class="casos"
+    id="teclado"
+>
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Periféricos de Oficina',
+        'Teclado',
+        'Proceso HW'
+    )"
+>
+Proceso HW
+</div>
+
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Periféricos de Oficina',
+        'Teclado',
+        'Generación de reporte en SN'
+    )"
+>
+Generación de reporte en SN
+</div>
+
+</div>
+</div>
+
+
+<!-- MOUSE -->
+
+<div class="subtema">
+
+<button
+    class="btn-subtema"
+    onclick="toggle('mouse')"
+>
+Mouse
+</button>
+
+<div
+    class="casos"
+    id="mouse"
+>
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Periféricos de Oficina',
+        'Mouse',
+        'Proceso HW'
+    )"
+>
+Proceso HW
+</div>
+
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Periféricos de Oficina',
+        'Mouse',
+        'Conexión correcta'
+    )"
+>
+Conexión correcta
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+<!-- =====================================================
+     VERSIONADO
+===================================================== -->
+
+<div class="tema">
+
+<button
+    class="btn-tema"
+    onclick="toggle('versionado')"
+>
+Versionado
+</button>
+
+<div
+    class="contenido"
+    id="versionado"
+>
+
+
+<!-- CIRCUITO -->
+
+<div class="subtema">
+
+<button
+    class="btn-subtema"
+    onclick="toggle('circuito')"
+>
+Circuito de Contratación
+</button>
+
+<div
+    class="casos"
+    id="circuito"
+>
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Versionado',
+        'Circuito de Contratación',
+        'TDC'
+    )"
+>
+TDC
+</div>
+
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Versionado',
+        'Circuito de Contratación',
+        'Consumo'
+    )"
+>
+Consumo
+</div>
+
+</div>
+</div>
+
+
+<!-- LINK CARD -->
+
+<div class="subtema">
+
+<button
+    class="btn-subtema"
+    onclick="toggle('linkcard')"
+>
+Link Card
+</button>
+
+<div
+    class="casos"
+    id="linkcard"
+>
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Versionado',
+        'Link Card',
+        'Formulario'
+    )"
+>
+Formulario
+</div>
+
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Versionado',
+        'Link Card',
+        'Enrolamiento Tutor'
+    )"
+>
+Enrolamiento Tutor
+</div>
+
+</div>
+</div>
+
+
+<!-- SOFT TOKEN -->
+
+<div class="subtema">
+
+<button
+    class="btn-subtema"
+    onclick="toggle('softtoken')"
+>
+Soft Token
+</button>
+
+<div
+    class="casos"
+    id="softtoken"
+>
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Versionado',
+        'Soft Token',
+        'Token Cronto'
+    )"
+>
+Token Cronto
+</div>
+
+
+<div
+    class="caso"
+    onclick="iniciarEscenario(
+        'Versionado',
+        'Soft Token',
+        'Token Digital Gema'
+    )"
+>
+Token Digital Gema
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+<!-- =====================================================
+     SIMULACIÓN ACTIVA
+===================================================== -->
+
+<div
+    class="card"
+    id="panelActivo"
+>
+
+<h2>Simulación en curso</h2>
+
+<div class="dato">
+<strong>Asesor:</strong>
+<span id="activoAsesor"></span>
+</div>
+
+<div class="dato">
+<strong>Tema:</strong>
+<span id="activoTema"></span>
+</div>
+
+<div class="dato">
+<strong>Subtema:</strong>
+<span id="activoSubtema"></span>
+</div>
+
+<div class="dato">
+<strong>Caso:</strong>
+<span id="activoCaso"></span>
+</div>
+
+<div class="dato">
+<strong>Inicio:</strong>
+<span id="activoFecha"></span>
+</div>
+
+
+<div
+    id="estadoConexion"
+    class="estado-box"
+>
+Esperando resultado de Xira...
+</div>
+
+
+<div class="form-group">
+
+<label for="calificacion">
+Calificación obtenida
+</label>
+
+<input
+    type="number"
+    id="calificacion"
+    min="0"
+    max="100"
+    placeholder="Ejemplo: 93"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label for="observaciones">
+Observaciones o retroalimentación
+</label>
+
+<textarea
+    id="observaciones"
+    placeholder="La retroalimentación de Xira aparecerá aquí..."
+></textarea>
+
+</div>
+
+
+<div class="acciones">
+
+<button
+    class="btn btn-xira"
+    onclick="abrirSoloXira()"
+>
+Abrir Xira nuevamente
+</button>
+
+
+<button
+    class="btn btn-pantallas"
+    onclick="abrirPantallas()"
+>
+Abrir Pantallas Negras
+</button>
+
+
+<button
+    class="btn btn-guardar"
+    onclick="finalizarSimulacion()"
+>
+Guardar resultado
+</button>
+
+
+<button
+    class="btn btn-cancelar"
+    onclick="cancelarSimulacion()"
+>
+Cancelar
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     HISTORIAL
+===================================================== -->
+
+<div class="card">
+
+<h2>Historial de simulaciones</h2>
+
+<div class="tabla-contenedor">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Asesor</th>
+<th>Tema</th>
+<th>Subtema</th>
+<th>Caso</th>
+<th>Fecha</th>
+<th>Calificación</th>
+<th>Estado</th>
+<th>Acción</th>
+</tr>
+
+</thead>
+
+<tbody id="tablaHistorial">
+</tbody>
+
+</table>
+
+</div>
+
+<div id="mensajeVacio">
+Todavía no existen simulaciones registradas.
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     PANEL PANTALLAS NEGRAS
+===================================================== -->
+
+<div id="panelPantallas">
+
+<div class="barra-pantallas">
+
+<h3>
+Pantallas Negras
+</h3>
+
+<div class="acciones-pantallas">
+
+<button
+    class="btn-pantalla-barra btn-nueva-pestana"
+    onclick="abrirPantallasNuevaPestana()"
+>
+Abrir en pestaña
+</button>
+
+<button
+    class="btn-pantalla-barra btn-cerrar-pantalla"
+    onclick="cerrarPantallas()"
+>
+Cerrar
+</button>
+
+</div>
+
+</div>
+
+
+<iframe
+    id="iframePantallas"
+    src=""
+></iframe>
+
+</div>
+
+
+
 <script>
+
+/* =====================================================
+   CONFIGURACIÓN
+===================================================== */
 
 const URL_XIRA =
 "https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config";
 
+const URL_PANTALLAS =
+"https://pentaformacion.github.io/Pantallas-negras/";
+
+const ORIGEN_XIRA =
+"https://pentafon-voicebot-simulador.xira.services";
+
 let simulacionActiva = null;
 
 
-/* =============================
-   MENUS
-============================= */
+
+/* =====================================================
+   MENÚS
+===================================================== */
 
 function toggle(id){
 
     const elemento =
         document.getElementById(id);
 
-    if(elemento.style.display === "block"){
-        elemento.style.display = "none";
+    if(
+        elemento.style.display === "block"
+    ){
+
+        elemento.style.display =
+            "none";
+
     }else{
-        elemento.style.display = "block";
+
+        elemento.style.display =
+            "block";
+
     }
 
 }
 
 
-/* =============================
-   INICIAR ESCENARIO
-============================= */
 
-function iniciarEscenario(tema, subtema, caso){
+/* =====================================================
+   INICIAR ESCENARIO
+===================================================== */
+
+function iniciarEscenario(
+    tema,
+    subtema,
+    caso
+){
 
     const asesor =
         document
-        .getElementById("nombreAsesor")
+        .getElementById(
+            "nombreAsesor"
+        )
         .value
         .trim();
+
 
     if(!asesor){
 
@@ -719,6 +1121,7 @@ function iniciarEscenario(tema, subtema, caso){
 
         return;
     }
+
 
     simulacionActiva = {
 
@@ -733,234 +1136,326 @@ function iniciarEscenario(tema, subtema, caso){
         caso: caso,
 
         fecha:
-            new Date().toLocaleString("es-MX"),
+            new Date()
+            .toLocaleString(
+                "es-MX"
+            ),
 
-        estado: "Iniciado",
+        estado:
+            "Iniciado",
 
-        calificacion: "",
+        calificacion:
+            "",
 
-        observaciones: ""
+        observaciones:
+            ""
 
     };
 
+
     localStorage.setItem(
         "simulacionActiva",
-        JSON.stringify(simulacionActiva)
+        JSON.stringify(
+            simulacionActiva
+        )
     );
 
-    registrarInicio(simulacionActiva);
+
+    registrarInicio(
+        simulacionActiva
+    );
+
 
     mostrarPanelActivo();
 
-    abrirXira();
-}
+
+    /*
+    Xira se abre en otra pestaña.
+    */
+
+    abrirSoloXira();
 
 
-/* =============================
-   ABRIR XIRA
-============================= */
+    /*
+    Pantallas Negras se muestra
+    dentro del Portal.
+    */
 
-function abrirXira(){
-
-    const pestañaXira = window.open(
-        "",
-        "_blank"
-    );
-
-    const pestañaPantallas = window.open(
-        "",
-        "_blank"
-    );
-
-    if(pestañaXira){
-        pestañaXira.location.href =
-        "https://pentafon-voicebot-simulador.xira.services/dashboard/simulation/config";
-    }
-
-    if(pestañaPantallas){
-        pestañaPantallas.location.href =
-        "https://pentaformacion.github.io/Pantallas-negras/";
-    }
+    abrirPantallas();
 
 }
 
-/* =============================
-   DETECTAR RESULTADO
-============================= */
 
-function detectarResultado(){
 
-    const texto =
-        document
-        .getElementById("resultadoXira")
-        .value
-        .trim();
+/* =====================================================
+   XIRA
+===================================================== */
 
-    const mensaje =
-        document
-        .getElementById("mensajeDeteccion");
+function abrirSoloXira(){
 
-    mensaje.textContent = "";
-    mensaje.className = "mensaje";
+    window.open(
+        URL_XIRA,
+        "_blank"
+    );
 
-    if(!texto){
+}
 
-        mensaje.textContent =
-            "Pega primero el resultado de Xira.";
 
-        mensaje.classList.add(
-            "mensaje-error"
+
+/* =====================================================
+   PANTALLAS NEGRAS
+===================================================== */
+
+function abrirPantallas(){
+
+    const iframe =
+        document.getElementById(
+            "iframePantallas"
         );
-
-        return;
-    }
-
-    let score = null;
-
-
-    /* Busca:
-       score: 93
-       "score": "93"
-       "score": 93
-    */
-
-    const scoreRegex =
-        /["']?score["']?\s*[:=]\s*["']?\s*(\d{1,3})/i;
-
-    const scoreMatch =
-        texto.match(scoreRegex);
-
-    if(scoreMatch){
-
-        score =
-            Number(scoreMatch[1]);
-
-    }
-
-
-    /* Si no encontró score,
-       busca porcentaje:
-       93%
-    */
-
-    if(score === null){
-
-        const porcentajeRegex =
-            /\b(100|[1-9]?\d)\s*%/;
-
-        const porcentajeMatch =
-            texto.match(porcentajeRegex);
-
-        if(porcentajeMatch){
-
-            score =
-                Number(
-                    porcentajeMatch[1]
-                );
-
-        }
-
-    }
-
-
-    /* Busca desempeño:
-       Desempeño 93
-    */
-
-    if(score === null){
-
-        const desempenoRegex =
-            /desempeño\s*[:\-]?\s*(\d{1,3})/i;
-
-        const desempenoMatch =
-            texto.match(desempenoRegex);
-
-        if(desempenoMatch){
-
-            score =
-                Number(
-                    desempenoMatch[1]
-                );
-
-        }
-
-    }
 
 
     if(
-        score !== null &&
-        score >= 0 &&
-        score <= 100
+        iframe.src !==
+        URL_PANTALLAS
     ){
 
-        document
-        .getElementById("calificacion")
-        .value = score;
+        iframe.src =
+            URL_PANTALLAS;
+
+    }
+
+
+    document
+    .getElementById(
+        "panelPantallas"
+    )
+    .style.display =
+        "block";
+
+}
+
+
+function cerrarPantallas(){
+
+    document
+    .getElementById(
+        "panelPantallas"
+    )
+    .style.display =
+        "none";
+
+}
+
+
+function abrirPantallasNuevaPestana(){
+
+    window.open(
+        URL_PANTALLAS,
+        "_blank"
+    );
+
+}
+
+
+
+/* =====================================================
+   RECIBIR RESULTADO DE XIRA
+===================================================== */
+
+window.addEventListener(
+    "message",
+    function(event){
+
+        /*
+        Solo aceptamos mensajes
+        provenientes de Xira.
+        */
+
+        if(
+            event.origin !==
+            ORIGEN_XIRA
+        ){
+            return;
+        }
+
+
+        if(
+            !event.data ||
+            event.data.tipo !==
+            "resultadoXira"
+        ){
+            return;
+        }
+
+
+        if(!simulacionActiva){
+
+            console.log(
+                "Llegó resultado de Xira pero no existe una simulación activa."
+            );
+
+            return;
+        }
+
+
+        const resultado =
+            event.data;
+
+
+        console.log(
+            "Resultado recibido de Xira:",
+            resultado
+        );
+
+
+        /* CALIFICACIÓN */
+
+        if(
+            resultado.score !==
+            undefined &&
+            resultado.score !==
+            null
+        ){
+
+            document
+            .getElementById(
+                "calificacion"
+            )
+            .value =
+                resultado.score;
+
+        }
+
+
+        /* RETROALIMENTACIÓN */
+
+        let textoRetro =
+            "";
+
+
+        if(resultado.feedback){
+
+            textoRetro +=
+                resultado.feedback;
+
+        }
+
+
+        if(resultado.evaluation){
+
+            if(textoRetro){
+
+                textoRetro +=
+                    "\n\n";
+
+            }
+
+            textoRetro +=
+                resultado.evaluation;
+
+        }
+
+
+        /* CRITERIOS */
+
+        if(resultado.criterios){
+
+            if(textoRetro){
+
+                textoRetro +=
+                    "\n\n";
+
+            }
+
+
+            textoRetro +=
+                "DESGLOSE DE EVALUACIÓN:\n\n";
+
+
+            if(
+                Array.isArray(
+                    resultado.criterios
+                )
+            ){
+
+                resultado.criterios
+                .forEach(
+                    criterio => {
+
+                        textoRetro +=
+                            criterio +
+                            "\n";
+
+                    }
+                );
+
+            }else{
+
+                textoRetro +=
+                    JSON.stringify(
+                        resultado.criterios,
+                        null,
+                        2
+                    );
+
+            }
+
+        }
 
 
         document
-        .getElementById("observaciones")
-        .value = texto;
+        .getElementById(
+            "observaciones"
+        )
+        .value =
+            textoRetro;
 
 
-        mensaje.textContent =
-            "Calificación detectada: " +
-            score +
+        /* ESTADO */
+
+        const estado =
+            document
+            .getElementById(
+                "estadoConexion"
+            );
+
+
+        estado.textContent =
+            "✓ Resultado recibido de Xira: " +
+            resultado.score +
             "%";
 
-        mensaje.classList.add(
-            "mensaje-ok"
+
+        estado.classList.add(
+            "ok"
         );
 
-    }else{
 
-        mensaje.textContent =
-            "No pude detectar automáticamente la calificación. Puedes ingresarla manualmente.";
+        /* GUARDAMOS TEMPORALMENTE */
 
-        mensaje.classList.add(
-            "mensaje-error"
-        );
-
-    }
-
-}
+        simulacionActiva.calificacion =
+            resultado.score ?? "";
 
 
-/* =============================
-   REGISTRAR INICIO
-============================= */
+        simulacionActiva.observaciones =
+            textoRetro;
 
-function registrarInicio(simulacion){
 
-    let historial =
-        obtenerHistorial();
-
-    const existe =
-        historial.some(
-            item =>
-            item.id === simulacion.id
-        );
-
-    if(!existe){
-
-        historial.unshift(
-            simulacion
-        );
-
-        guardarHistorial(
-            historial
+        localStorage.setItem(
+            "simulacionActiva",
+            JSON.stringify(
+                simulacionActiva
+            )
         );
 
     }
-
-    renderHistorial();
-
-}
+);
 
 
-/* =============================
-   PANEL ACTIVO
-============================= */
+
+/* =====================================================
+   MOSTRAR PANEL ACTIVO
+===================================================== */
 
 function mostrarPanelActivo(){
 
@@ -968,51 +1463,117 @@ function mostrarPanelActivo(){
         return;
     }
 
-    document
-    .getElementById("panelActivo")
-    .style.display = "block";
 
     document
-    .getElementById("activoAsesor")
+    .getElementById(
+        "panelActivo"
+    )
+    .style.display =
+        "block";
+
+
+    document
+    .getElementById(
+        "activoAsesor"
+    )
     .textContent =
         simulacionActiva.asesor;
 
+
     document
-    .getElementById("activoTema")
+    .getElementById(
+        "activoTema"
+    )
     .textContent =
         simulacionActiva.tema;
 
+
     document
-    .getElementById("activoSubtema")
+    .getElementById(
+        "activoSubtema"
+    )
     .textContent =
         simulacionActiva.subtema;
 
+
     document
-    .getElementById("activoCaso")
+    .getElementById(
+        "activoCaso"
+    )
     .textContent =
         simulacionActiva.caso;
 
+
     document
-    .getElementById("activoFecha")
+    .getElementById(
+        "activoFecha"
+    )
     .textContent =
         simulacionActiva.fecha;
 
+
     document
-    .getElementById("calificacion")
+    .getElementById(
+        "calificacion"
+    )
     .value =
         simulacionActiva.calificacion || "";
 
+
     document
-    .getElementById("observaciones")
+    .getElementById(
+        "observaciones"
+    )
     .value =
         simulacionActiva.observaciones || "";
 
 }
 
 
-/* =============================
-   FINALIZAR
-============================= */
+
+/* =====================================================
+   REGISTRAR INICIO
+===================================================== */
+
+function registrarInicio(
+    simulacion
+){
+
+    let historial =
+        obtenerHistorial();
+
+
+    const existe =
+        historial.some(
+            item =>
+            item.id ===
+            simulacion.id
+        );
+
+
+    if(!existe){
+
+        historial.unshift(
+            simulacion
+        );
+
+
+        guardarHistorial(
+            historial
+        );
+
+    }
+
+
+    renderHistorial();
+
+}
+
+
+
+/* =====================================================
+   FINALIZAR SIMULACIÓN
+===================================================== */
 
 function finalizarSimulacion(){
 
@@ -1023,27 +1584,39 @@ function finalizarSimulacion(){
         );
 
         return;
+
     }
+
 
     const calificacion =
         document
-        .getElementById("calificacion")
+        .getElementById(
+            "calificacion"
+        )
         .value;
+
 
     const observaciones =
         document
-        .getElementById("observaciones")
+        .getElementById(
+            "observaciones"
+        )
         .value
         .trim();
 
-    if(calificacion === ""){
+
+    if(
+        calificacion === ""
+    ){
 
         alert(
             "Ingresa la calificación obtenida."
         );
 
         return;
+
     }
+
 
     if(
         Number(calificacion) < 0 ||
@@ -1055,23 +1628,34 @@ function finalizarSimulacion(){
         );
 
         return;
+
     }
 
+
     simulacionActiva.calificacion =
-        Number(calificacion);
+        Number(
+            calificacion
+        );
+
 
     simulacionActiva.observaciones =
         observaciones;
 
+
     simulacionActiva.estado =
         "Finalizado";
 
+
     simulacionActiva.fechaFinal =
         new Date()
-        .toLocaleString("es-MX");
+        .toLocaleString(
+            "es-MX"
+        );
+
 
     let historial =
         obtenerHistorial();
+
 
     historial =
         historial.map(
@@ -1091,33 +1675,34 @@ function finalizarSimulacion(){
             }
         );
 
+
     guardarHistorial(
         historial
     );
+
 
     localStorage.removeItem(
         "simulacionActiva"
     );
 
-    simulacionActiva = null;
+
+    simulacionActiva =
+        null;
+
 
     document
-    .getElementById("panelActivo")
-    .style.display = "none";
+    .getElementById(
+        "panelActivo"
+    )
+    .style.display =
+        "none";
 
-    document
-    .getElementById("resultadoXira")
-    .value = "";
 
-    document
-    .getElementById("calificacion")
-    .value = "";
+    cerrarPantallas();
 
-    document
-    .getElementById("observaciones")
-    .value = "";
 
     renderHistorial();
+
 
     alert(
         "Resultado guardado correctamente."
@@ -1126,9 +1711,10 @@ function finalizarSimulacion(){
 }
 
 
-/* =============================
-   CANCELAR
-============================= */
+
+/* =====================================================
+   CANCELAR SIMULACIÓN
+===================================================== */
 
 function cancelarSimulacion(){
 
@@ -1136,17 +1722,21 @@ function cancelarSimulacion(){
         return;
     }
 
+
     const confirmar =
         confirm(
             "¿Deseas cancelar esta simulación?"
         );
 
+
     if(!confirmar){
         return;
     }
 
+
     let historial =
         obtenerHistorial();
+
 
     historial =
         historial.filter(
@@ -1155,28 +1745,41 @@ function cancelarSimulacion(){
             simulacionActiva.id
         );
 
+
     guardarHistorial(
         historial
     );
+
 
     localStorage.removeItem(
         "simulacionActiva"
     );
 
-    simulacionActiva = null;
+
+    simulacionActiva =
+        null;
+
 
     document
-    .getElementById("panelActivo")
-    .style.display = "none";
+    .getElementById(
+        "panelActivo"
+    )
+    .style.display =
+        "none";
+
+
+    cerrarPantallas();
+
 
     renderHistorial();
 
 }
 
 
-/* =============================
+
+/* =====================================================
    HISTORIAL
-============================= */
+===================================================== */
 
 function obtenerHistorial(){
 
@@ -1185,13 +1788,19 @@ function obtenerHistorial(){
             "historialSimulaciones"
         );
 
+
     if(!datos){
+
         return [];
+
     }
+
 
     try{
 
-        return JSON.parse(datos);
+        return JSON.parse(
+            datos
+        );
 
     }catch(error){
 
@@ -1202,57 +1811,83 @@ function obtenerHistorial(){
 }
 
 
-function guardarHistorial(historial){
+function guardarHistorial(
+    historial
+){
 
     localStorage.setItem(
         "historialSimulaciones",
-        JSON.stringify(historial)
+        JSON.stringify(
+            historial
+        )
     );
 
 }
 
+
+
+/* =====================================================
+   MOSTRAR HISTORIAL
+===================================================== */
 
 function renderHistorial(){
 
     const historial =
         obtenerHistorial();
 
+
     const tabla =
-        document.getElementById(
+        document
+        .getElementById(
             "tablaHistorial"
         );
 
-    const vacio =
-        document.getElementById(
+
+    const mensaje =
+        document
+        .getElementById(
             "mensajeVacio"
         );
 
-    tabla.innerHTML = "";
 
-    if(historial.length === 0){
+    tabla.innerHTML =
+        "";
 
-        vacio.style.display =
+
+    if(
+        historial.length === 0
+    ){
+
+        mensaje.style.display =
             "block";
 
         return;
 
     }
 
-    vacio.style.display =
+
+    mensaje.style.display =
         "none";
+
 
     historial.forEach(
         item => {
 
             const fila =
-                document.createElement(
+                document
+                .createElement(
                     "tr"
                 );
 
+
             const claseEstado =
-                item.estado === "Finalizado"
+                item.estado ===
+                "Finalizado"
+
                 ? "estado-finalizado"
+
                 : "estado-iniciado";
+
 
             fila.innerHTML = `
 
@@ -1302,6 +1937,7 @@ function renderHistorial(){
                 </td>
             `;
 
+
             tabla.appendChild(
                 fila
             );
@@ -1312,9 +1948,10 @@ function renderHistorial(){
 }
 
 
-/* =============================
+
+/* =====================================================
    BORRAR REGISTRO
-============================= */
+===================================================== */
 
 function borrarRegistro(id){
 
@@ -1323,12 +1960,15 @@ function borrarRegistro(id){
             "¿Deseas borrar este registro?"
         );
 
+
     if(!confirmar){
         return;
     }
 
+
     let historial =
         obtenerHistorial();
+
 
     historial =
         historial.filter(
@@ -1336,18 +1976,21 @@ function borrarRegistro(id){
             item.id !== id
         );
 
+
     guardarHistorial(
         historial
     );
+
 
     renderHistorial();
 
 }
 
 
-/* =============================
-   ESCAPAR HTML
-============================= */
+
+/* =====================================================
+   SEGURIDAD TEXTO
+===================================================== */
 
 function escaparHTML(texto){
 
@@ -1355,42 +1998,48 @@ function escaparHTML(texto){
         texto === null ||
         texto === undefined
     ){
+
         return "";
+
     }
 
-    return String(texto)
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
+    return String(
+        texto
+    )
 
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
 
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
 
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
 
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
 }
 
 
-/* =============================
-   RECUPERAR ACTIVA
-============================= */
+
+/* =====================================================
+   RECUPERAR SIMULACIÓN
+===================================================== */
 
 function recuperarSimulacionActiva(){
 
@@ -1399,9 +2048,11 @@ function recuperarSimulacionActiva(){
             "simulacionActiva"
         );
 
+
     if(!guardada){
         return;
     }
+
 
     try{
 
@@ -1410,6 +2061,7 @@ function recuperarSimulacionActiva(){
                 guardada
             );
 
+
         document
         .getElementById(
             "nombreAsesor"
@@ -1417,20 +2069,23 @@ function recuperarSimulacionActiva(){
         .value =
             simulacionActiva.asesor;
 
+
         mostrarPanelActivo();
 
     }catch(error){
 
-        simulacionActiva = null;
+        simulacionActiva =
+            null;
 
     }
 
 }
 
 
-/* =============================
+
+/* =====================================================
    INICIO
-============================= */
+===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
